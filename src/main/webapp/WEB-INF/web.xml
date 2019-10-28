@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>TrackVision</display-name>
+  
+  <listener>
+    <listener-class>servlets.InitializationServlet</listener-class>
+  </listener>
+  
+  <welcome-file-list>
+    <welcome-file>index</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+    <servlet-name>indexId</servlet-name>
+    <servlet-class>servlets.IndexServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>addEmployeeId</servlet-name>
+  	<servlet-class>servlets.AddEmployeeServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>listEmployeesId</servlet-name>
+  	<servlet-class>servlets.ListEmployeesServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>indexId</servlet-name>
+    <url-pattern>/index</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>addEmployeeId</servlet-name>
+  	<url-pattern>/addEmployee</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>listEmployeesId</servlet-name>
+  	<url-pattern>/listEmployees</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
