@@ -32,7 +32,7 @@ public class AddEmployeeServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    
-	    Connection connection = Configuration.connectionpool.getConnection();
+	    Connection connection = Configuration.connectionPool.getConnection();
 	    Boolean error = false;
 	    try {
 	    	PreparedStatement stmt = connection.prepareStatement("INSERT INTO Employees(first_name, last_name, email_address) values(?,?,?);");
@@ -43,7 +43,7 @@ public class AddEmployeeServlet extends HttpServlet {
 		} catch (Exception e) {
 			error = true;
 		}finally {
-			Configuration.connectionpool.closeConnection(connection);	
+			Configuration.connectionPool.closeConnection(connection);	
 		}
 	    
 	    if(error)

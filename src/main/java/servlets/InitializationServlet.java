@@ -9,7 +9,7 @@ public class InitializationServlet implements javax.servlet.ServletContextListen
 
 	public void contextInitialized(ServletContextEvent sce) {
 		if(Configuration.startup==true) {
-			Configuration.connectionpool = new JDBCConnectionPool();
+			Configuration configuration = new Configuration();
 			Configuration.startup=false;
 		}
 	}

@@ -32,7 +32,7 @@ public class ListEmployeesServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Employee> employees = new ArrayList<Employee>();
-		Connection connection = Configuration.connectionpool.getConnection();
+		Connection connection = Configuration.connectionPool.getConnection();
 		String requestSQL = "SELECT * FROM Employees";
 		try {
 			Statement statement = connection.createStatement();
@@ -42,7 +42,7 @@ public class ListEmployeesServlet extends HttpServlet {
 			}
 		}
 		catch(Exception e) {System.out.println("Error : " + e.getMessage());}
-		Configuration.connectionpool.closeConnection(connection);
+		Configuration.connectionPool.closeConnection(connection);
 		String linesTable = "";
 		for(Employee employee : employees)
 			linesTable+= employee + "\n";
@@ -54,7 +54,7 @@ public class ListEmployeesServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 
-	    Connection connection = Configuration.connectionpool.getConnection();
+	    Connection connection = Configuration.connectionPool.getConnection();
 	    Boolean error = false;
 	    try {
 	    	PreparedStatement stmt = connection.prepareStatement("DELETE FROM Employees WHERE id=?;");
@@ -63,7 +63,7 @@ public class ListEmployeesServlet extends HttpServlet {
 		} catch (Exception e) {
 			error = true;
 		}finally {
-			Configuration.connectionpool.closeConnection(connection);	
+			Configuration.connectionPool.closeConnection(connection);	
 		}
 	    
 	    if(error)

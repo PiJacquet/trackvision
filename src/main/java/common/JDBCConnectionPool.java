@@ -29,7 +29,8 @@ public class JDBCConnectionPool {
 		try{  
 			// Database name (be carefull of the upper/lower case), username, password	
 			//connection = DriverManager.getConnection("jdbc:mysql://10.1.3.2:3306/trackdevbd","client_dev","toto");
-			connection = DriverManager.getConnection("jdbc:mysql://10.1.3.2/trackdevdb","client_dev","toto");
+			connection = DriverManager.getConnection("jdbc:mysql://" + Configuration.db_url + "/" + Configuration.db_name ,
+						 Configuration.db_user,Configuration.db_pwd);
 			listConnections.add(connection);
 		}
 		catch(Exception e){ 
