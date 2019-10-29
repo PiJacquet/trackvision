@@ -20,7 +20,6 @@ public class Configuration {
 		try {
 			InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties");
 			properties.load(input);
-			System.out.println(db_url);
 			db_url = properties.getProperty("db_url");
 			db_name = properties.getProperty("db_name");
 			db_user = properties.getProperty("db_user");

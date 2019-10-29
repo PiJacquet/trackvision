@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import business.EmployeeForm;
 import common.Configuration;
 
 /**
@@ -32,26 +33,15 @@ public class AddEmployeeServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    
-	    Connection connection = Configuration.connectionPool.getConnection();
-	    Boolean error = false;
-	    try {
-	    	PreparedStatement stmt = connection.prepareStatement("INSERT INTO Employees(first_name, last_name, email_address) values(?,?,?);");
-		    stmt.setString(1, request.getParameter("firstname"));
-		    stmt.setString(2, request.getParameter("lastname"));
-		    stmt.setString(3, request.getParameter("email")); 
-			stmt.executeUpdate();
-		} catch (Exception e) {
-			error = true;
-		}finally {
-			Configuration.connectionPool.closeConnection(connection);	
-		}
+		EmployeeForm form = new EmployeeForm(request.getParameter("firstname"), request.getParameter("lastname"), request.getParameter("email"));
 	    
-	    if(error)
-	    	request.setAttribute("optionalMessage", "A problem occured during the process :(");
-	    else
+	    if(form.executeInscription())
 	    	request.setAttribute("optionalMessage", "The employee was added!");
-	    
-		doGet(request, response);
+	    else
+	    	request.setAttribute("optionalMessage", "A problem occured during the process :(");
+	    	
+	    RequestDispatcher view = request.getRequestDispatcher("WEB-INF/addEmployee.jsp");
+		view.forward(request, response);
 	}
 
 }

@@ -1,4 +1,4 @@
-package common;
+package beans;
 
 public class Employee {
 	
@@ -28,9 +28,10 @@ public class Employee {
 		return emailAddress;
 	}
 
-	public String toString() {
+	public String getEmployeeTableLine() {
 		String action = "<form action='/tv/listEmployees' method='post'><input type='hidden' name='id' value='"+id+"'>" +
 				"<div class='row'><input type='submit' value='Delete'></div></form>";
+		
 		return "<tr><td>" + id + "</td><td>" + firstName + "</td><td>" + lastName + "</td><td>" + emailAddress + 
 				"</td><td>" + action + "</td></tr>";
 	}
