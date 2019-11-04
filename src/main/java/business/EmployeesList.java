@@ -22,7 +22,7 @@ public class EmployeesList {
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery(requestSQL);
 			while(result.next()) {
-				employees.add(new Employee(result.getInt(1),result.getString(2),result.getString(3),result.getString(4)));
+				employees.add(new Employee(result));
 			}
 			Configuration.connectionPool.closeConnection(connection);
 		}

@@ -1,5 +1,8 @@
 package beans;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Employee {
 	
 	private Integer id;
@@ -7,12 +10,11 @@ public class Employee {
 	private String lastName;
 	private String emailAddress;
 	
-	public Employee(Integer id, String firstName, String lastName, String emailAddress) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.emailAddress = emailAddress;
+	public Employee(ResultSet result) throws SQLException {
+		id = result.getInt(1);
+		firstName = result.getString(2);
+		lastName = result.getString(3);
+		emailAddress = result.getString(4);
 	}
 	
 	public Integer getId() {
