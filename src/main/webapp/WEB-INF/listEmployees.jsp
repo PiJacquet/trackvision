@@ -12,7 +12,7 @@
 
 <body>
 
-	<div w3-include-html="/tv/common/menu.html"></div>
+	<div w3-include-html="/tv/common/${menu}.html"></div>
 	
 	<div style="padding-left:16px">
 	
@@ -29,6 +29,8 @@
   			${linesTable}
 		</table>
 	</div>
+
+	<div w3-include-html="/tv/common/footer.html"></div>
 
 	<script>includeHTML();</script>
 	
