@@ -37,10 +37,14 @@ public class MenuFilter implements Filter {
 				if (cookie.getName().equals("TokenTV")) {
 					if(Configuration.connectedAccounts.isConnected(cookie.getValue())) {
 						tokenFound = true;
-						if(Configuration.connectedAccounts.getAccount(cookie.getValue()).getAccount()==AccountType.Resident)
+						if(Configuration.connectedAccounts.getAccount(cookie.getValue()).getAccount()==AccountType.Resident) {
+							req.setAttribute("isIdentified", 1);
 							req.setAttribute("menu", "menuResident");
-						else
+						}
+						else {
+							req.setAttribute("isIdentified", 2);
 							req.setAttribute("menu", "menuEmployee");
+						}
 						req.setAttribute("TokenTV", cookie.getValue());
 					}else {
 						// Outdated cookie, we remove it
@@ -54,6 +58,7 @@ public class MenuFilter implements Filter {
 		}
 
 		if(!tokenFound) {
+			req.setAttribute("isIdentified", 0);
 			req.setAttribute("menu", "menuNotConnected");
 		}
 

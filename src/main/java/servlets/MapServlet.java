@@ -17,13 +17,13 @@ import common.Configuration;
 /**
  * Servlet implementation class ListEmployeesServlet
  */
-public class ListEmployeesServlet extends HttpServlet {
+public class MapServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ListEmployeesServlet() {
+	public MapServlet() {
 		super();
 	}
 
@@ -35,10 +35,7 @@ public class ListEmployeesServlet extends HttpServlet {
 			return;
 		}
 		
-		EmployeesList list = new EmployeesList();
-		request.setAttribute("linesTable",list.getEmployeesTableLines());
-		
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/listEmployees.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/map.jsp");
 		view.forward(request, response);
 		
 	}
@@ -50,15 +47,6 @@ public class ListEmployeesServlet extends HttpServlet {
 			response.sendRedirect("/tv");
 			return;
 		}
-		
-		EmployeesList list = new EmployeesList();
-		
-		if(list.deleteEmployee(request.getParameter("id")))
-			request.setAttribute("optionalMessage", "The employee was deleted!<br>");
-	    else
-	    	request.setAttribute("optionalMessage", "A problem occured during the process :(<br>");
-		
-		request.setAttribute("linesTable",list.getEmployeesTableLines());
 		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/listEmployees.jsp");
 		view.forward(request, response);

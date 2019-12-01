@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.AccountType;
-import beans.ConnectAccount;
+import business.ConnectAccount;
 import common.Configuration;
 
 /**
@@ -25,14 +25,28 @@ public class ConnectServlet extends HttpServlet {
     public ConnectServlet() {
         super();
     }
-
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if((Integer)request.getAttribute("isIdentified") != 0) {
+			// The user is already connected, we redirect him
+			response.sendRedirect("/tv");
+			return;
+		}
+		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/connect.jsp");
 		view.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    try {
+	    
+		if((Integer)request.getAttribute("isIdentified") != 0) {
+			// The user is already connected, we redirect him
+			response.sendRedirect("/tv");
+			return;
+		}
+		
+		try {
 	    	ConnectAccount connect;
 	    	
 	    	if(request.getParameter("isResident")!=null)
