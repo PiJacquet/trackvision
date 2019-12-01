@@ -18,9 +18,8 @@ public class Employee extends User{
 		login = result.getString(2);
 		lastName = result.getString(4);
 		firstName = result.getString(5);
-		function = result.getString(6);
-		number = result.getString(7);
-		addresseId = result.getInt(8);
+		number = result.getString(6);
+		addresseId = result.getInt(7);
 	}
 	
 	public Integer getId() {
