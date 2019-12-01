@@ -21,10 +21,11 @@ public class ResidentForm {
 	public boolean executeInscription() {
 		Connection connection = Configuration.connectionPool.getConnection();
 		try {
-			PreparedStatement stmt = connection.prepareStatement("INSERT INTO Residents(first_name, last_name, email_address) values(?,?,?);");
+			PreparedStatement stmt = connection.prepareStatement("insert into Residents(Login_Resident, Password_Resident, Lastname_Resident, Firstname_Resident, Age_Resident, Information_Resident, ID_Apartment) values (?,?,?,?,?,?,?);");
 			stmt.setString(1, firstname);
 			stmt.setString(2, lastname);
 			stmt.setString(3, email); 
+			//TODO
 			stmt.executeUpdate();
 			Configuration.connectionPool.closeConnection(connection);	
 		} catch (Exception e) {

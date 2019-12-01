@@ -2,8 +2,6 @@ package business;
 
 import java.util.HashMap;
 
-import beans.ConnectAccount;
-
 public class ManageConnectedAccounts {
 	
 	private HashMap<String,ConnectAccount> connectedAccounts;
