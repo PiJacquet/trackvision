@@ -57,7 +57,7 @@
 		<servlet-name>connectId</servlet-name>
 		<url-pattern>/connect</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>disconnectId</servlet-name>
 		<servlet-class>servlets.DisconnectServlet</servlet-class>
@@ -65,6 +65,24 @@
 	<servlet-mapping>
 		<servlet-name>disconnectId</servlet-name>
 		<url-pattern>/disconnect</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>mapId</servlet-name>
+		<servlet-class>servlets.MapServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mapId</servlet-name>
+		<url-pattern>/map</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>apartmentId</servlet-name>
+		<servlet-class>servlets.ApartmentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>apartmentId</servlet-name>
+		<url-pattern>/map/*</url-pattern>
 	</servlet-mapping>
 
 </web-app>

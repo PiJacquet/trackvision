@@ -1,0 +1,88 @@
+/* Style of the Menu  */
+
+.residence{
+	background-color: #e6e6e6;
+	left: 0;
+	right: 0;
+	width: 99%;
+	padding: 5px 5px;
+}
+
+.level {
+	background-color: #bfbfbf;
+	left: 0;
+	right: 0;
+	width: 97%;
+	margin: 0px auto;
+}
+
+.apartment {
+	display: inline-block;
+	margin: 10px 10px 10px;
+	border-radius: 25px;
+	width: 130px;
+	height: 80px;
+	line-height: 80px;
+	text-align: center;
+	color: white;
+	text-decoration: none;
+}
+
+.noalert {
+	background-color: #4CAF50;
+}
+
+.noalert:hover {
+	background-color: #46a049;
+}
+
+.alert {
+	background-color: #ff6666;
+}
+
+.alert:hover {
+	background-color: #ff4d4d;
+}
+
+.button-refresh {
+	background-color: #0d0d0d;
+	float:right;
+	border: none;
+	color: white;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+}
+
+.button-refresh:hover {
+	background-color: #ddd;
+	color : black;
+}
+
+.distinguishedAlertTable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 98%;
+  margin: 0px auto;
+}
+
+.distinguishedAlertTable td, .distinguishedAlertTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.distinguishedAlertTable tr:nth-child(even){background-color: #f2f2f2;}
+
+.distinguishedAlertTable tr:hover {background-color: #ddd;}
+
+.distinguishedAlertTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #ff6666;
+  color: white;
+}

@@ -1,6 +1,6 @@
-drop database trackprddb;
-create database trackprddb;
-use trackprddb;
+drop database trackdevdb;
+create database trackdevdb;
+use trackdevdb;
 
 #------------------------------------------------------------
 #        Script MySQL.
@@ -57,7 +57,7 @@ CREATE TABLE Employees(
 # Table: Levels
 #------------------------------------------------------------
 CREATE TABLE Levels(
-        ID_Level    Int  Auto_increment  NOT NULL ,
+        ID_Level          Int   NOT NULL ,
         ID_Residence      Int NOT NULL
 	,CONSTRAINT Level_PK PRIMARY KEY (ID_Level,ID_Residence)
 	,CONSTRAINT Level_Residences_FK FOREIGN KEY (ID_Residence) REFERENCES Residences(ID_Residence)
@@ -138,7 +138,7 @@ CREATE TABLE Alerts(
 
 CREATE TABLE Malfunctions(
         ID_Malfunction   Int  Auto_increment  NOT NULL ,
-		State_Malfuncion  Bool NOT NULL ,
+		State_Malfunction  Bool NOT NULL ,
         Date_Malfunction TIMESTAMP NOT NULL ,
         Message_Malfunction   Varchar (60) ,
         ID_Object             Int NOT NULL
@@ -166,9 +166,10 @@ CREATE TABLE ObjectsSmoke(
 
 CREATE TABLE ObjectsTemperature(
         ID_ObjectTemperature           Int NOT NULL ,
-        Reference_ObjectTemperature    Float NOT NULL ,
-        ToleranceMin_ObjectTemperature Float NOT NULL ,
-        ToleranceMax_ObjectTemperature Float NOT NULL 
+        Reference_ObjectTemperature    Float,
+        ToleranceMin_ObjectTemperature Float,
+        ToleranceMax_ObjectTemperature Float,
+        currentTemp_ObjectTemperature  Float
 	,CONSTRAINT ObjectTemperature_PK PRIMARY KEY (ID_ObjectTemperature)
 	,CONSTRAINT ObjectTemperature_Objects_FK FOREIGN KEY (ID_ObjectTemperature) REFERENCES Objects(ID_Object)
 )ENGINE=InnoDB;
@@ -180,8 +181,8 @@ CREATE TABLE ObjectsTemperature(
 
 CREATE TABLE ObjectsFurnace(
         ID_ObjectFurnace    Int NOT NULL ,
-        Reference_ObjectTemperature  Float NOT NULL ,
-		currentTemp_ObjetTemperature Float NOT NULL
+        Reference_ObjectTemperature  Float,
+		currentTemp_ObjetTemperature Float
 	,CONSTRAINT ObjectFurnace_PK PRIMARY KEY (ID_ObjectFurnace)
 	,CONSTRAINT ObjectFurnace_Objects_FK FOREIGN KEY (ID_ObjectFurnace) REFERENCES Objects(ID_Object)
 )ENGINE=InnoDB;
@@ -198,11 +199,34 @@ insert into Employees (Login_Employee, Password_Employee, Lastname_Employee, Fir
 insert into Residences (Name_Residence, ID_Address) values ('R1', 1);
 
 insert into Levels (ID_Level, ID_Residence) values (0, 1);
+insert into Levels (ID_Level, ID_Residence) values (1, 1);
 
-insert into Apartments(Name_Apartment, ID_Level) values('Apartment A' , 1);
+insert into Apartments(Name_Apartment, ID_Level) values('Apartment A' , 0);
+insert into Apartments(Name_Apartment, ID_Level) values('Apartment B' , 0);
+insert into Apartments(Name_Apartment, ID_Level) values('Apartment C' , 0);
+insert into Apartments(Name_Apartment, ID_Level) values('Apartment D' , 0);
+insert into Apartments(Name_Apartment, ID_Level) values('Apartment E' , 0);
+insert into Apartments(Name_Apartment, ID_Level) values('Apartment F' , 0);
+insert into Apartments(Name_Apartment, ID_Level) values('Apartment G' , 0);
+insert into Apartments(Name_Apartment, ID_Level) values('Apartment H' , 1);
+insert into Apartments(Name_Apartment, ID_Level) values('Apartment I' , 1);
+insert into Apartments(Name_Apartment, ID_Level) values('Apartment J' , 1);
 
 insert into Residents(Login_Resident, Password_Resident, Lastname_Resident, Firstname_Resident, Age_Resident, Information_Resident, ID_Apartment) values ('pierre_res','tv','Jacquet','Pierre',85,'RAS',1);
 
 
 insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Smoke sensor', 1, 1, 'c0:b0:0c:07:ac:11');
-insert into ObjectsSmoke (ID_ObjectSmoke, Sensibility_ObjectSmoke) values (1,20);
+insert into ObjectsSmoke (ID_ObjectSmoke, Sensibility_ObjectSmoke) values (LAST_INSERT_ID(),20);
+
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Temperature Sensor', 1, 1, '4e:c1:45:47:ab:32');
+insert into ObjectsTemperature (ID_ObjectTemperature, Reference_ObjectTemperature, ToleranceMin_ObjectTemperature, ToleranceMax_ObjectTemperature, currentTemp_ObjectTemperature) values (LAST_INSERT_ID(),20.0,16.0,24.0,15.0); 
+
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Furnace', 1, 7, '8f:c9:ed:07:ca:24');
+insert into ObjectsFurnace (ID_ObjectFurnace, Reference_ObjectTemperature,currentTemp_ObjetTemperature) values (LAST_INSERT_ID(),200.0,150.0);
+
+insert into Alerts (State_Alert, Level_Alert, Date_Alert, Message_Alert, ID_Object) values(1, 3, NOW(), 'Smoke detected', 1);
+insert into Alerts (State_Alert, Level_Alert, Date_Alert, Message_Alert, ID_Object) values(1, 1, NOW(), 'Too low temperature', 2);
+
+insert into Malfunctions(State_Malfunction, Date_Malfunction, Message_Malfunction, ID_Object) values(1, NOW(), 'Short circuit on the furnace', 3);
+
+

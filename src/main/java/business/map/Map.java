@@ -11,21 +11,28 @@ import beans.Apartment;
 import common.Configuration;
 
 public class Map {
-	
+
 	private HashMap<Integer,ArrayList<Apartment>> map;
-	
+
 	public Map() throws IOException {
 		map = new HashMap<Integer, ArrayList<Apartment>>();
 		Connection connection = Configuration.connectionPool.getConnection();
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet result = statement.executeQuery("SELECT * FROM Apartments");
+			// We retrieve the list of Apartments with the alerts associated
+			ResultSet result = statement.executeQuery
+					("SELECT Apartments.ID_Apartment, Apartments.Name_Apartment, Apartments.ID_Level, sum(case when Alerts.State_Alert = 1 then 1 else 0 end) as Alerts, sum(case when Malfunctions.State_Malfunction= 1 then 1 else 0 end) as Malfunctions " + 
+							"FROM Apartments LEFT JOIN Objects ON Objects.ID_Apartment=Apartments.ID_Apartment " + 
+							"LEFT JOIN Alerts ON Objects.ID_Object=Alerts.ID_Object " + 
+							"LEFT JOIN Malfunctions ON Objects.ID_Object=Malfunctions.ID_Object " + 
+							"GROUP BY Apartments.ID_Apartment, Apartments.Name_Apartment, Apartments.ID_Level " +
+							"ORDER BY Apartments.ID_LEVEL,Apartments.ID_Apartment");
 			Integer level;
 			while(result.next()) {
-				level = result.getInt(2);
+				level = result.getInt(3);
 				if(!map.containsKey(level))
 					map.put(level, new ArrayList<Apartment>());
-				map.get(level).add(new Apartment());
+				map.get(level).add(new Apartment(result));
 			}
 			Configuration.connectionPool.closeConnection(connection);
 		}
@@ -34,13 +41,29 @@ public class Map {
 			throw new IOException("An error occured while constructing the map : " + e.getMessage());
 		}
 	}
-	
+
 	public Map(HashMap<Integer, ArrayList<Apartment>> map) {
 		this.map = map;
 	}
-	
+
 	public String toString() {
-		return null;
+		String result = "";
+		Integer numberLine = 0;
+		for (Integer level : map.keySet()) {
+			result+="<div class='level'>" + "\n";
+			result+="<h4>Level " + level + "</h4>" + "\n";
+			result+="<div>" + "\n";
+			for(Apartment apart : map.get(level)) {
+				result+= apart;
+				if(++numberLine==5) { //Five apartments maximum on the same line
+					result+="</div>\n<div>\n";
+					numberLine=0;
+				}
+			}
+			result+="</div>" + "\n";
+			result+="</div>" + "\n";
+		}
+		return result;
 	}
 
 }
