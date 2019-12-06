@@ -19,7 +19,7 @@ public class MapTest {
 		for(int i = 0; i<2 ; i++) {
 			ArrayList<Apartment> level = new ArrayList<Apartment>();
 			for(int j = 1; j<=5;j++) {
-				level.add(new Apartment());
+				level.add(new Apartment(i,"Apartment " + i, i));
 			}
 			hashedMap.put(i, level);
 		}

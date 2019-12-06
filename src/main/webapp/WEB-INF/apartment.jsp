@@ -18,95 +18,26 @@
 	<div w3-include-html="/tv/common/${menu}.html"></div>
 
 	<a href="/tv/map" class="button-refresh">Return to the map</a>
-	<a href="/tv/map" class="button-refresh">See on the map</a>
+	<form action="/tv/map" method="POST">
+		<input name="apartmentId" type="hidden" value="${apartmentId}">
+		<input type="submit" class="button-refresh" value="See on the map">
+	</form>
 
-	<h3>Information about the Apartment A (level 0)</h3>
+	${message}
+
+	<h3>Information about the Apartment '${apartmentName}' (level ${apartmentLevel})</h3>
+
+	<h4>Who lives here?</h4>
+	${residentsInfo}
+
+	${activeAlerts}
 	
-	<p> Information about the resident </p>
+	<h4>List of related objects</h4>
 
-	<h4>Current alerts</h4>
-	<table class="distinguishedAlertTable">
-		<tr>
-			<th>ID</th>
-			<th>Level</th>
-			<th>Date</th>
-			<th>Message</th>
-			<th>Object</th>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>2</td>
-			<td>2019-12-02</td>
-			<td>Toto</td>
-		</tr>
-		<tr>
-			<th>ID</th>
-			<th>Level</th>
-			<th>Date</th>
-			<th>Message</th>
-			<th>Object</th>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>2</td>
-			<td>2019-12-02</td>
-			<td>Toto</td>
-		</tr>
-	</table>
-
-	<h4>List of related Objects</h4>
-	<table class="distinguishedTable">
-		<tr>
-			<th>ID</th>
-			<th>Type</th>
-			<th>State</th>
-			<th>Mac address</th>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>Smoke detector</td>
-			<td>On</td>
-			<td>12:34:56:78</td>
-		</tr>
-		<tr>
-			<td>2</td>
-			<td>Furnace</td>
-			<td>Off</td>
-			<td>ab:45:ef:gh</td>
-		</tr>
-	</table>
+	${objects}
 	
-	<h4>Old alerts</h4>
-	<table class="distinguishedTable">
-		<tr>
-			<th>ID</th>
-			<th>Level</th>
-			<th>Date</th>
-			<th>Message</th>
-			<th>Object</th>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>2</td>
-			<td>2019-12-02</td>
-			<td>Toto</td>
-		</tr>
-		<tr>
-			<th>ID</th>
-			<th>Level</th>
-			<th>Date</th>
-			<th>Message</th>
-			<th>Object</th>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>2</td>
-			<td>2019-12-02</td>
-			<td>Toto</td>
-		</tr>
-	</table>
+	${oldAlerts}
 
-	
 	<div w3-include-html="/tv/common/footer.html"></div>
 
 	<script>

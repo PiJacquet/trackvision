@@ -31,7 +31,7 @@ public class ListEmployeesServlet extends HttpServlet {
 		
 		if((Integer)request.getAttribute("isIdentified") != 2) {
 			// The user must be an administrator identified
-			response.sendRedirect("/tv");
+			response.sendRedirect("/tv/connect");
 			return;
 		}
 		

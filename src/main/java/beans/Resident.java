@@ -23,5 +23,8 @@ public class Resident extends User {
 		apartment = result.getInt(8);
 	}
 
+	public String toString() {
+		return firstName + " " + lastName + " (" + age + " years old) : " + information;
+	}
 
 }

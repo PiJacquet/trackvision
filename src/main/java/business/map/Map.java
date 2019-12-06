@@ -13,6 +13,7 @@ import common.Configuration;
 public class Map {
 
 	private HashMap<Integer,ArrayList<Apartment>> map;
+	private Integer locatedApartId = -1;
 
 	public Map() throws IOException {
 		map = new HashMap<Integer, ArrayList<Apartment>>();
@@ -46,16 +47,22 @@ public class Map {
 		this.map = map;
 	}
 
+	public Map(Integer locatedApartId) throws IOException {
+		this();
+		this.locatedApartId = locatedApartId;
+	}
+
 	public String toString() {
 		String result = "";
-		Integer numberLine = 0;
+		final Integer maxnumberLine = 5;
 		for (Integer level : map.keySet()) {
 			result+="<div class='level'>" + "\n";
 			result+="<h4>Level " + level + "</h4>" + "\n";
 			result+="<div>" + "\n";
+			Integer numberLine = 0;
 			for(Apartment apart : map.get(level)) {
-				result+= apart;
-				if(++numberLine==5) { //Five apartments maximum on the same line
+				result+= apart.getLink(locatedApartId);
+				if(++numberLine==maxnumberLine) { //number maximum on the same line
 					result+="</div>\n<div>\n";
 					numberLine=0;
 				}

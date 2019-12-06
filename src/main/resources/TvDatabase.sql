@@ -213,6 +213,9 @@ insert into Apartments(Name_Apartment, ID_Level) values('Apartment I' , 1);
 insert into Apartments(Name_Apartment, ID_Level) values('Apartment J' , 1);
 
 insert into Residents(Login_Resident, Password_Resident, Lastname_Resident, Firstname_Resident, Age_Resident, Information_Resident, ID_Apartment) values ('pierre_res','tv','Jacquet','Pierre',85,'RAS',1);
+insert into Residents(Login_Resident, Password_Resident, Lastname_Resident, Firstname_Resident, Age_Resident, Information_Resident, ID_Apartment) values ('pierre_res2','tv','Jacquet2','Pierre2',87,'RAS 2',1);
+
+insert into Residents(Login_Resident, Password_Resident, Lastname_Resident, Firstname_Resident, Age_Resident, Information_Resident, ID_Apartment) values ('ismail_res','tv','Zaaouar','Ismail',87,'RAS',2);
 
 
 insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Smoke sensor', 1, 1, 'c0:b0:0c:07:ac:11');
@@ -221,12 +224,33 @@ insert into ObjectsSmoke (ID_ObjectSmoke, Sensibility_ObjectSmoke) values (LAST_
 insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Temperature Sensor', 1, 1, '4e:c1:45:47:ab:32');
 insert into ObjectsTemperature (ID_ObjectTemperature, Reference_ObjectTemperature, ToleranceMin_ObjectTemperature, ToleranceMax_ObjectTemperature, currentTemp_ObjectTemperature) values (LAST_INSERT_ID(),20.0,16.0,24.0,15.0); 
 
-insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Furnace', 1, 7, '8f:c9:ed:07:ca:24');
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Furnace', 1, 1, '8f:c9:ed:07:ca:24');
 insert into ObjectsFurnace (ID_ObjectFurnace, Reference_ObjectTemperature,currentTemp_ObjetTemperature) values (LAST_INSERT_ID(),200.0,150.0);
 
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Smoke sensor', 1, 2, 'a8:87:dd:b9:ca:19');
+insert into ObjectsSmoke (ID_ObjectSmoke, Sensibility_ObjectSmoke) values (LAST_INSERT_ID(),20);
+
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Temperature Sensor', 1, 2, '36:3d:e7:9a:f5:15');
+insert into ObjectsTemperature (ID_ObjectTemperature, Reference_ObjectTemperature, ToleranceMin_ObjectTemperature, ToleranceMax_ObjectTemperature, currentTemp_ObjectTemperature) values (LAST_INSERT_ID(),20.0,16.0,24.0,15.0); 
+
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Furnace', 1, 2, 'd8:b2:7a:11:21:1a');
+insert into ObjectsFurnace (ID_ObjectFurnace, Reference_ObjectTemperature,currentTemp_ObjetTemperature) values (LAST_INSERT_ID(),200.0,150.0);
+
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Smoke sensor', 1, 7, 'dc:6b:f1:e8:a2:06');
+insert into ObjectsSmoke (ID_ObjectSmoke, Sensibility_ObjectSmoke) values (LAST_INSERT_ID(),20);
+
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Temperature Sensor', 1, 7, 'b7:47:79:6d:3c:78');
+insert into ObjectsTemperature (ID_ObjectTemperature, Reference_ObjectTemperature, ToleranceMin_ObjectTemperature, ToleranceMax_ObjectTemperature, currentTemp_ObjectTemperature) values (LAST_INSERT_ID(),20.0,16.0,24.0,15.0); 
+
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Furnace', 1, 7, 'f6:a2:be:ea:66:95');
+insert into ObjectsFurnace (ID_ObjectFurnace, Reference_ObjectTemperature,currentTemp_ObjetTemperature) values (LAST_INSERT_ID(),200.0,150.0);
+
+insert into Alerts (State_Alert, Level_Alert, Date_Alert, Message_Alert, ID_Object) values(0, 3, NOW(), 'Smoke detected', 1);
 insert into Alerts (State_Alert, Level_Alert, Date_Alert, Message_Alert, ID_Object) values(1, 3, NOW(), 'Smoke detected', 1);
 insert into Alerts (State_Alert, Level_Alert, Date_Alert, Message_Alert, ID_Object) values(1, 1, NOW(), 'Too low temperature', 2);
 
+insert into Malfunctions(State_Malfunction, Date_Malfunction, Message_Malfunction, ID_Object) values(0, NOW(), 'Negative smoke value received', 1);
 insert into Malfunctions(State_Malfunction, Date_Malfunction, Message_Malfunction, ID_Object) values(1, NOW(), 'Short circuit on the furnace', 3);
+insert into Malfunctions(State_Malfunction, Date_Malfunction, Message_Malfunction, ID_Object) values(1, NOW(), 'Short circuit on the furnace', 9);
 
 
