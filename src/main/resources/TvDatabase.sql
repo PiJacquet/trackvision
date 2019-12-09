@@ -2,6 +2,8 @@ drop database trackdevdb;
 create database trackdevdb;
 use trackdevdb;
 
+
+
 #------------------------------------------------------------
 #        Script MySQL.
 #------------------------------------------------------------
@@ -90,6 +92,15 @@ CREATE TABLE Residents(
 		ID_Apartment         Int
 	,CONSTRAINT Residents_PK PRIMARY KEY (ID_Resident)
 	,CONSTRAINT Residents_Apartment_FK FOREIGN KEY (ID_Apartment) REFERENCES Apartments(ID_Apartment)
+)ENGINE=InnoDB;
+
+CREATE TABLE Candidate(
+        ID_Candidate Int  Auto_increment  NOT NULL ,
+        firstname Varchar (30) NOT NULL ,
+        lastname Varchar (30) NOT NULL ,
+        email Varchar (30) NOT NULL,
+        password Varchar (40) NOT NULL ,
+        CONSTRAINT ID_Candidate PRIMARY KEY (ID_Candidate)
 )ENGINE=InnoDB;
 
 #------------------------------------------------------------
