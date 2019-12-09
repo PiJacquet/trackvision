@@ -39,15 +39,13 @@ public class CandidateServlet extends HttpServlet {
 		candidate.setFirstname(request.getParameter("firstname"));
 		candidate.setLastname(request.getParameter("lastname"));
 		candidate.setEmail(request.getParameter("email"));
-		candidate.setEmail(request.getParameter("password"));
-		CandidateForm candidateForm = new CandidateForm();
+		candidate.setPassword(request.getParameter("password"));
+		CandidateForm candidateForm = new CandidateForm(candidate);
 		
-	    
 	    if(candidateForm.executeInscription())
 	    	request.setAttribute("optionalMessage", "succesfull inscription!");
 	    else
-	    	request.setAttribute("optionalMessage", "A problem occured during the process :(");
-	    	
+	    	request.setAttribute("optionalMessage", "A problem occured during the process :("); 
 	    RequestDispatcher view = request.getRequestDispatcher("WEB-INF/candidate.jsp");
 		view.forward(request, response);
 	}
