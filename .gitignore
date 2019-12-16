@@ -7,7 +7,8 @@
 bin/
 tmp/
 target/
-WEBCONTENT/WEB-INF/
+WEBCONTENT/
+WebContent/
 *.tmp
 *.bak
 *.swp
