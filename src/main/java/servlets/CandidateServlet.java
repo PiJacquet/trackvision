@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.Candidate;
+import business.CandidateForm;
 import business.ResidentForm;
 import common.Configuration;
 
@@ -33,13 +35,17 @@ public class CandidateServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    
-		ResidentForm form = new ResidentForm(request.getParameter("firstname"), request.getParameter("lastname"), request.getParameter("email"));
-	    
-	    if(form.executeInscription())
-	    	request.setAttribute("optionalMessage", "The employee was added!");
+		Candidate candidate = new Candidate();
+		candidate.setFirstname(request.getParameter("firstname"));
+		candidate.setLastname(request.getParameter("lastname"));
+		candidate.setEmail(request.getParameter("email"));
+		candidate.setPassword(request.getParameter("password"));
+		CandidateForm candidateForm = new CandidateForm(candidate);
+		
+	    if(candidateForm.executeInscription())
+	    	request.setAttribute("optionalMessage", "succesfull inscription!");
 	    else
-	    	request.setAttribute("optionalMessage", "A problem occured during the process :(");
-	    	
+	    	request.setAttribute("optionalMessage", "A problem occured during the process :("); 
 	    RequestDispatcher view = request.getRequestDispatcher("WEB-INF/candidate.jsp");
 		view.forward(request, response);
 	}

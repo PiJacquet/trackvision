@@ -12,56 +12,48 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.Employee;
 import business.EmployeesList;
+import business.map.Map;
 import common.Configuration;
 
 /**
  * Servlet implementation class ListEmployeesServlet
  */
-public class ListEmployeesServlet extends HttpServlet {
+public class MapServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ListEmployeesServlet() {
+	public MapServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		if((Integer)request.getAttribute("isIdentified") != 2) {
 			// The user must be an administrator identified
 			response.sendRedirect("/tv/connect");
 			return;
 		}
-		
-		EmployeesList list = new EmployeesList();
-		request.setAttribute("linesTable",list.getEmployeesTableLines());
-		
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/listEmployees.jsp");
+
+		request.setAttribute("map", new Map());
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/map.jsp");
 		view.forward(request, response);
-		
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if((Integer)request.getAttribute("isIdentified") != 2) {
-			// The user must be an administrator identified
-			response.sendRedirect("/tv");
+		Integer locatedApartId;
+		try {
+			locatedApartId = Integer.parseInt(request.getParameter("apartmentId"));
+		}catch (NumberFormatException nfe) {
+			doGet(request,response);
 			return;
 		}
-		
-		EmployeesList list = new EmployeesList();
-		
-		if(list.deleteEmployee(request.getParameter("id")))
-			request.setAttribute("optionalMessage", "The employee was deleted!<br>");
-	    else
-	    	request.setAttribute("optionalMessage", "A problem occured during the process :(<br>");
-		
-		request.setAttribute("linesTable",list.getEmployeesTableLines());
-		
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/listEmployees.jsp");
+		request.setAttribute("map", new Map(locatedApartId));
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/map.jsp");
 		view.forward(request, response);
+
 	}
 
 }

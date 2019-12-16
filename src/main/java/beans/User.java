@@ -1,5 +1,5 @@
 package beans;
 
-public class User {
+public abstract class User {
 
 }

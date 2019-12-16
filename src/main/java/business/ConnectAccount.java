@@ -1,10 +1,14 @@
-package beans;
+package business;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import beans.AccountType;
+import beans.Employee;
+import beans.Resident;
+import beans.User;
 import common.Configuration;
 
 public class ConnectAccount {
@@ -17,12 +21,12 @@ public class ConnectAccount {
 		Connection connection = Configuration.connectionPool.getConnection();
 		
 		if(account==AccountType.Resident) {
-			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Residents  WHERE Identifiant_Resident=? AND MotDePasse_Resident=?;");
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Residents  WHERE Login_Resident=? AND Password_Resident=?;");
 			ResultSet result = establishConnection(stmt, login, password);
 			this.user = new Resident(result);
 		}
 		else {
-			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Personnels WHERE Identifiant_Personnel=? AND MotDePasse_Personnel=?;");
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Employees WHERE Login_Employee=? AND Password_Employee=?;");
 			ResultSet result = establishConnection(stmt, login, password);
 			this.user = new Employee(result);
 		}

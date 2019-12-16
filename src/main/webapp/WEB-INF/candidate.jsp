@@ -6,6 +6,7 @@
 <link href="/tv/common/styleMain.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="icon" type="image/png" href="/tv/pictures/icon.png">
 <script type="text/javascript" src="/tv/script/includeHTML.js"></script>
 <script type="text/javascript" src="/tv/script/toggleMenu.js"></script>
 <title>TrackVision</title>
@@ -48,6 +49,16 @@
 							placeholder="Your email..">
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-25">
+						<label for="pass">Password (8 characters minimum):</label>
+					</div>
+					<div class="col-75">
+						<input type="password" id="pass" name="password"
+           				minlength="8" required>
+					</div>
+				</div>
+				
 				<div class="row">
 					<input type="submit" value="Submit">
 				</div>

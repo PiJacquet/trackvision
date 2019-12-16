@@ -17,7 +17,7 @@ public class EmployeesList {
 	public EmployeesList() throws IOException {
 		employees = new ArrayList<Employee>();
 		Connection connection = Configuration.connectionPool.getConnection();
-		String requestSQL = "SELECT * FROM Personnels";
+		String requestSQL = "SELECT * FROM Employees";
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery(requestSQL);
@@ -37,7 +37,7 @@ public class EmployeesList {
 		Connection connection = Configuration.connectionPool.getConnection();
 		
 	    try {
-	    	PreparedStatement stmt = connection.prepareStatement("DELETE FROM Employees WHERE id=?;");
+	    	PreparedStatement stmt = connection.prepareStatement("DELETE FROM Employees WHERE ID_Employee=?;");
 	    	stmt.setString(1, id);
 			stmt.executeUpdate();
 			Configuration.connectionPool.closeConnection(connection);
