@@ -93,5 +93,14 @@
 		<servlet-name>configurationServletId</servlet-name>
 		<url-pattern>/configuration</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UtilisationServletId</servlet-name>
+		<servlet-class>servlets.UtilisationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UtilisationServletId</servlet-name>
+		<url-pattern>/utilisation</url-pattern>
+	</servlet-mapping>
 
 </web-app>

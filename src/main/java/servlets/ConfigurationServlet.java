@@ -27,7 +27,7 @@ extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/configuration.jsp");
 		view.forward(request, response);
-		 System.out.println("toto");
+		 
 	}
 
 
