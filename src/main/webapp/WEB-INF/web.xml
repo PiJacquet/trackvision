@@ -84,5 +84,23 @@
 		<servlet-name>apartmentId</servlet-name>
 		<url-pattern>/map/*</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>packageId</servlet-name>
+		<servlet-class>servlets.PackageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>packageId</servlet-name>
+		<url-pattern>/package</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>choiceId</servlet-name>
+		<servlet-class>servlets.PackageChoiceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>choiceId</servlet-name>
+		<url-pattern>/packageChoice</url-pattern>
+	</servlet-mapping>
 
 </web-app>
