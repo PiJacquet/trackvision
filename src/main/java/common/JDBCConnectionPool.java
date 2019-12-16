@@ -26,6 +26,7 @@ public class JDBCConnectionPool {
 
 	public boolean init() {
 		Connection connection = null;
+		
 		try{  
 			// Database name (be carefull of the upper/lower case), username, password	
 			//connection = DriverManager.getConnection("jdbc:mysql://10.1.3.2:3306/trackdevbd","client_dev","toto");

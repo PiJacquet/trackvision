@@ -2,6 +2,8 @@ drop database trackdevdb;
 create database trackdevdb;
 use trackdevdb;
 
+
+
 #------------------------------------------------------------
 #        Script MySQL.
 #------------------------------------------------------------
@@ -90,6 +92,15 @@ CREATE TABLE Residents(
 		ID_Apartment         Int
 	,CONSTRAINT Residents_PK PRIMARY KEY (ID_Resident)
 	,CONSTRAINT Residents_Apartment_FK FOREIGN KEY (ID_Apartment) REFERENCES Apartments(ID_Apartment)
+)ENGINE=InnoDB;
+
+CREATE TABLE Candidate(
+        ID_Candidate Int  Auto_increment  NOT NULL ,
+        firstname Varchar (30) NOT NULL ,
+        lastname Varchar (30) NOT NULL ,
+        email Varchar (30) NOT NULL,
+        password Varchar (40) NOT NULL ,
+        CONSTRAINT ID_Candidate PRIMARY KEY (ID_Candidate)
 )ENGINE=InnoDB;
 
 #------------------------------------------------------------
@@ -188,9 +199,24 @@ CREATE TABLE ObjectsFurnace(
 )ENGINE=InnoDB;
 
 
+
+#------------------------------------------------------------
+# Table: HistoricalMedicalData
+#------------------------------------------------------------
+CREATE TABLE HistoricalMedicalData(
+	     Id_hHistoriqueMedicalData  Int  Auto_increment  NOT NULL ,
+         Date Varchar (20) NOT NULL ,
+	     MedicalData       float,
+         Id_Object int not null,
+	  ,CONSTRAINT ID_HistoricaleMedicalData_PK PRIMARY KEY (ID_HistoricalMedicalData),
+       CONSTRAINT Data_Object_FK FOREIGN KEY (ID_Object ) Objects(ID_Object))ENGINE=InnoDB;
+);
+
+
 insert into Referentiel_Objects(Type_Object) values('Smoke Sensor');
 insert into Referentiel_Objects(Type_Object) values('Temperature Sensor');
 insert into Referentiel_Objects(Type_Object) values('Furnace');
+insert into Referentiel_Objects(Type_Object) values('Connected Bracelet');
 
 insert into Addresses (Number_Address, Street_Address, City_Address, PostalCode_Address, Country_Address) values ('71', 'rue Saint-Simon' , 'Créteil' , '94000', 'France');
 
@@ -245,6 +271,9 @@ insert into ObjectsTemperature (ID_ObjectTemperature, Reference_ObjectTemperatur
 insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Furnace', 1, 7, 'f6:a2:be:ea:66:95');
 insert into ObjectsFurnace (ID_ObjectFurnace, Reference_ObjectTemperature,currentTemp_ObjetTemperature) values (LAST_INSERT_ID(),200.0,150.0);
 
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Connected Bracelet', 1, 1, '34:f5:ee:a4:87:23');
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Connected Bracelet', 1, 2, 'e9:67:8a:98:6d:56');
+
 insert into Alerts (State_Alert, Level_Alert, Date_Alert, Message_Alert, ID_Object) values(0, 3, NOW(), 'Smoke detected', 1);
 insert into Alerts (State_Alert, Level_Alert, Date_Alert, Message_Alert, ID_Object) values(1, 3, NOW(), 'Smoke detected', 1);
 insert into Alerts (State_Alert, Level_Alert, Date_Alert, Message_Alert, ID_Object) values(1, 1, NOW(), 'Too low temperature', 2);
@@ -252,5 +281,6 @@ insert into Alerts (State_Alert, Level_Alert, Date_Alert, Message_Alert, ID_Obje
 insert into Malfunctions(State_Malfunction, Date_Malfunction, Message_Malfunction, ID_Object) values(0, NOW(), 'Negative smoke value received', 1);
 insert into Malfunctions(State_Malfunction, Date_Malfunction, Message_Malfunction, ID_Object) values(1, NOW(), 'Short circuit on the furnace', 3);
 insert into Malfunctions(State_Malfunction, Date_Malfunction, Message_Malfunction, ID_Object) values(1, NOW(), 'Short circuit on the furnace', 9);
+
 
 
