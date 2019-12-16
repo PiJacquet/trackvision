@@ -6,23 +6,23 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import beans.ConnectedObjects;
+import beans.ConnectedObject;
 import beans.Employee;
 import common.Configuration;
 
 public class ConnectedObjectsList {
 	
-	private ArrayList<ConnectedObjects> CObjects;
+	private ArrayList<ConnectedObject> CObjects;
 	
 	public ConnectedObjectsList() throws IOException {
-		CObjects = new ArrayList<ConnectedObjects>();
+		CObjects = new ArrayList<ConnectedObject>();
 		Connection connection = Configuration.connectionPool.getConnection();
 		String requestSQL = "SELECT * FROM Objects";
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery(requestSQL);
 			while(result.next()) {
-				CObjects.add(new ConnectedObjects(result));
+				CObjects.add(new ConnectedObject(result));
 			}
 			Configuration.connectionPool.closeConnection(connection);
 		}
