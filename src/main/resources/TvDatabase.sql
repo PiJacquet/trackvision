@@ -37,6 +37,21 @@ CREATE TABLE Residences(
 	,CONSTRAINT Residences_Adress_AK UNIQUE (ID_Address)
 )ENGINE=InnoDB;
 
+#------------------------------------------------------------
+# Table: Package
+#------------------------------------------------------------
+
+CREATE TABLE Package(
+        ID_PACKAGE   Int Auto_increment NOT NULL ,
+        package_name Varchar (50) NOT NULL ,
+        price Int NOT NULL ,
+        description Varchar (50) NOT NULL ,
+        connected_object Int NOT NULL ,
+        meal Int NOT NULL ,
+        total_price
+        ,CONSTRAINT Package_PK PRIMARY KEY (ID_PACKAGE)
+)ENGINE=InnoDB;
+
 
 #------------------------------------------------------------
 # Table: Employees

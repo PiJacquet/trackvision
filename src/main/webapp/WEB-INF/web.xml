@@ -97,10 +97,14 @@
 	<servlet>
 		<servlet-name>UtilisationServletId</servlet-name>
 		<servlet-class>servlets.UtilisationServlet</servlet-class>
+		<servlet-name>choiceId</servlet-name>
+		<servlet-class>servlets.PackageChoiceServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>UtilisationServletId</servlet-name>
 		<url-pattern>/utilisation</url-pattern>
+		<servlet-name>choiceId</servlet-name>
+		<url-pattern>/packageChoice</url-pattern>
 	</servlet-mapping>
 
 </web-app>
