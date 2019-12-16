@@ -37,7 +37,7 @@ public class EmployeesList {
 		Connection connection = Configuration.connectionPool.getConnection();
 		
 	    try {
-	    	PreparedStatement stmt = connection.prepareStatement("DELETE FROM Employees WHERE id=?;");
+	    	PreparedStatement stmt = connection.prepareStatement("DELETE FROM Employees WHERE ID_Employee=?;");
 	    	stmt.setString(1, id);
 			stmt.executeUpdate();
 			Configuration.connectionPool.closeConnection(connection);

@@ -1,43 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>TrackVision</display-name>
-  
-  <listener>
-    <listener-class>servlets.InitializationServlet</listener-class>
-  </listener>
-  
-  <welcome-file-list>
-    <welcome-file>index</welcome-file>
-  </welcome-file-list>
-  
-  <servlet>
-    <servlet-name>indexId</servlet-name>
-    <servlet-class>servlets.IndexServlet</servlet-class>
-  </servlet>
-  
-  <servlet>
-  	<servlet-name>addEmployeeId</servlet-name>
-  	<servlet-class>servlets.AddEmployeeServlet</servlet-class>
-  </servlet>
-  
-  <servlet>
-  	<servlet-name>listEmployeesId</servlet-name>
-  	<servlet-class>servlets.ListEmployeesServlet</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>indexId</servlet-name>
-    <url-pattern>/index</url-pattern>
-  </servlet-mapping>
-  
-  <servlet-mapping>
-  	<servlet-name>addEmployeeId</servlet-name>
-  	<url-pattern>/addEmployee</url-pattern>
-  </servlet-mapping>
-  
-  <servlet-mapping>
-  	<servlet-name>listEmployeesId</servlet-name>
-  	<url-pattern>/listEmployees</url-pattern>
-  </servlet-mapping>
-  
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>TrackVision</display-name>
+
+	<listener>
+		<listener-class>servlets.InitializationServlet</listener-class>
+	</listener>
+
+	<welcome-file-list>
+		<welcome-file>index</welcome-file>
+	</welcome-file-list>
+
+	<filter>
+		<filter-name>menuFilterId</filter-name>
+		<filter-class>servlets.MenuFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>menuFilterId</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>indexId</servlet-name>
+		<servlet-class>servlets.IndexServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>indexId</servlet-name>
+		<url-pattern>/index</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>candidateId</servlet-name>
+		<servlet-class>servlets.CandidateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>candidateId</servlet-name>
+		<url-pattern>/candidate</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>listEmployeesId</servlet-name>
+		<servlet-class>servlets.ListEmployeesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>listEmployeesId</servlet-name>
+		<url-pattern>/listEmployees</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>connectId</servlet-name>
+		<servlet-class>servlets.ConnectServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>connectId</servlet-name>
+		<url-pattern>/connect</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>disconnectId</servlet-name>
+		<servlet-class>servlets.DisconnectServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>disconnectId</servlet-name>
+		<url-pattern>/disconnect</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>mapId</servlet-name>
+		<servlet-class>servlets.MapServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mapId</servlet-name>
+		<url-pattern>/map</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>apartmentId</servlet-name>
+		<servlet-class>servlets.ApartmentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>apartmentId</servlet-name>
+		<url-pattern>/map/*</url-pattern>
+	</servlet-mapping>
+
 </web-app>

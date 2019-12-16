@@ -3,6 +3,8 @@ package common;
 import java.io.InputStream;
 import java.util.Properties;
 
+import business.ManageConnectedAccounts;
+
 public class Configuration {
 	
 	public static Boolean startup = true;
@@ -13,6 +15,8 @@ public class Configuration {
 	public static String db_name;
 	public static String db_user;
 	public static String db_pwd;
+	
+	public static ManageConnectedAccounts connectedAccounts;
 	
 	public Configuration() {
 		
@@ -29,6 +33,7 @@ public class Configuration {
 		}
 		
 		connectionPool = new JDBCConnectionPool();
+		connectedAccounts = new ManageConnectedAccounts();
 	}
 
 }

@@ -29,6 +29,12 @@ public class ListEmployeesServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if((Integer)request.getAttribute("isIdentified") != 2) {
+			// The user must be an administrator identified
+			response.sendRedirect("/tv/connect");
+			return;
+		}
+		
 		EmployeesList list = new EmployeesList();
 		request.setAttribute("linesTable",list.getEmployeesTableLines());
 		
@@ -38,6 +44,12 @@ public class ListEmployeesServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if((Integer)request.getAttribute("isIdentified") != 2) {
+			// The user must be an administrator identified
+			response.sendRedirect("/tv");
+			return;
+		}
 		
 		EmployeesList list = new EmployeesList();
 		

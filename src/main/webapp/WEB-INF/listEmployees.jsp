@@ -5,6 +5,7 @@
 <head>
 	<link href="/tv/common/styleMain.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="icon" type="image/png" href="/tv/pictures/icon.png">
 	<script type="text/javascript" src="/tv/script/includeHTML.js"></script>
 	<script type="text/javascript" src="/tv/script/toggleMenu.js"></script>
 	<title>TrackVision</title>
@@ -12,7 +13,7 @@
 
 <body>
 
-	<div w3-include-html="/tv/common/menu.html"></div>
+	<div w3-include-html="/tv/common/${menu}.html"></div>
 	
 	<div style="padding-left:16px">
 	
@@ -29,6 +30,8 @@
   			${linesTable}
 		</table>
 	</div>
+
+	<div w3-include-html="/tv/common/footer.html"></div>
 
 	<script>includeHTML();</script>
 	
