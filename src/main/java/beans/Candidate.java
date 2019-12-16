@@ -1,6 +1,8 @@
 package beans;
 
 public class Candidate {
+	private String civility;
+	private int age;
 	private String firstname;
 	private String lastname;
 	private String email;
@@ -29,6 +31,18 @@ public class Candidate {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getCivility() {
+		return civility;
+	}
+	public void setCivility(String civility) {
+		this.civility = civility;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 }

@@ -18,12 +18,14 @@ public class CandidateForm {
 	public boolean executeInscription() {
 		Connection connection = Configuration.connectionPool.getConnection();
 		try {
-			PreparedStatement stmt = connection.prepareStatement("insert into Candidate(firstname, lastname, email, password,profil) VALUES (?,?,?,?,?);");
-			stmt.setString(1, candidate.getFirstname());
-			stmt.setString(2, candidate.getLastname());
-			stmt.setString(3, candidate.getEmail());
-			stmt.setString(4, candidate.getPassword());
-			stmt.setString(5, "");
+			PreparedStatement stmt = connection.prepareStatement("insert into Candidate(civility,age,firstname, lastname, email, password,profil) VALUES (?,?,?,?,?,?,?);");
+			stmt.setString(1, candidate.getCivility());
+			stmt.setInt(2, candidate.getAge());
+			stmt.setString(3, candidate.getFirstname());
+			stmt.setString(4, candidate.getLastname());
+			stmt.setString(5, candidate.getEmail());
+			stmt.setString(6, candidate.getPassword());
+			stmt.setString(7, "");
 			stmt.executeUpdate();
 			System.out.println("cool");
 			Configuration.connectionPool.closeConnection(connection);	

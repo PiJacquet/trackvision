@@ -13,22 +13,34 @@
 </head>
 
 <body>
-
 	<div w3-include-html="/tv/common/${menu}.html"></div>
-
+	
 	<div style="padding-left: 16px">
 		<br>
 		${optionalMessage}
 		<h3>Want to join the residence?</h3>
 		<div class="container">
 			<form action="/tv/candidate" method="post">
+			<label>Civility</label><br>
+       		<input type="radio" name="civility" value="M." checked="checked"> M.
+       		<input type="radio" name="civility" value="Mme"> Mme
+       		
+       		<div class="row">
+					<div class="col-25">
+						<label for="fname"> Age </label>
+					</div>
+					<div class="col-75">
+						<input type="number"  id="age" name="age"
+						placeholder="Your Age.." size="50" style="width:100px";" required= step="1">
+					</div>
+			</div>
 				<div class="row">
 					<div class="col-25">
 						<label for="fname">First Name</label>
 					</div>
-					<div class="col-75">
+					<div class="col-55">
 						<input type="text" id="fname" name="firstname"
-							placeholder="Your name..">
+							placeholder="Your name.." size="50" style="width:500px";" required>
 					</div>
 				</div>
 				<div class="row">
@@ -37,7 +49,7 @@
 					</div>
 					<div class="col-75">
 						<input type="text" id="lname" name="lastname"
-							placeholder="Your last name..">
+							placeholder="Your last name.."  style="width:500px";" required>
 					</div>
 				</div>
 				<div class="row">
@@ -46,7 +58,7 @@
 					</div>
 					<div class="col-75">
 						<input type="text" id="email" name="email"
-							placeholder="Your email..">
+							placeholder="Your email.."  style="width:500px";" required>
 					</div>
 				</div>
 				<div class="row">
@@ -54,8 +66,8 @@
 						<label for="pass">Password (8 characters minimum):</label>
 					</div>
 					<div class="col-75">
-						<input type="password" id="pass" name="password"
-           				minlength="8" required>
+						<input type="password" id="pass" name="password" placeholder="Your password.."
+           				minlength="8" required    style="width:500px";">
 					</div>
 				</div>
 				

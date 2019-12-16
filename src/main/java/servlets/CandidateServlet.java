@@ -36,18 +36,25 @@ public class CandidateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    
 		Candidate candidate = new Candidate();
+		candidate.setCivility(request.getParameter("civility"));
+		String a = request.getParameter("age");
+		int age = Integer.parseInt(a);
+		candidate.setAge(age);
 		candidate.setFirstname(request.getParameter("firstname"));
 		candidate.setLastname(request.getParameter("lastname"));
 		candidate.setEmail(request.getParameter("email"));
 		candidate.setPassword(request.getParameter("password"));
 		CandidateForm candidateForm = new CandidateForm(candidate);
 		
-	    if(candidateForm.executeInscription())
+	    if(candidateForm.executeInscription()) {
 	    	request.setAttribute("optionalMessage", "succesfull inscription!");
+	    	
+	    	RequestDispatcher view = request.getRequestDispatcher("WEB-INF/questionnary.jsp");
+			view.forward(request, response);
+	    }
 	    else
 	    	request.setAttribute("optionalMessage", "A problem occured during the process :("); 
-	    RequestDispatcher view = request.getRequestDispatcher("WEB-INF/candidate.jsp");
-		view.forward(request, response);
+	    
 	}
 
 }
