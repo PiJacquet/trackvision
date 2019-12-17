@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import beans.Alert;
 import beans.Apartment;
@@ -18,10 +20,10 @@ public class ResidenceIndicators {
 	private ConnectedObject object;
 //	public int nbPannes;
 //	public int tauxPannes;
-	private ArrayList<Integer> listOfAlerts;
+	private Map<String,Integer> listOfAlerts;
 	private ArrayList<ConnectedObject> listObjects;
 	private int nbAlertTot;
-	private int tauxAlert;
+	private int tauxAlertByType;
 	
 	public ResidenceIndicators() throws IOException {
 		Connection connection = Configuration.connectionPool.getConnection();
@@ -44,18 +46,20 @@ public class ResidenceIndicators {
 //		retrieveMalfunctions();
 	}
 	private void retrieveAlertsByType() throws IOException{
-		listOfAlerts = new ArrayList<Integer>();
-		Number nbAlert = 0;
+		listOfAlerts = new HashMap<String,Integer>();
+		int nbAlert = 0;
+		String type;
 		Connection connection = Configuration.connectionPool.getConnection();
-		String requestSQL = "select count(*) from Alerts al, Objects ob where al.ID_Object=ob.ID_Object group  by type_object;";
+		String requestSQL = "select type_object, count(*) from Alerts al, Objects ob where al.ID_Object=ob.ID_Object group  by type_object;";
 
 		try {
 			// We retrieve the alerts associated to the apartment
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery(requestSQL);
 			while(result.next()) {
-				nbAlert = (Number)result;
-				listOfAlerts.add((Integer) nbAlert);
+				nbAlert = result.getInt(2);
+				type = result.getString(1);
+				listOfAlerts.put(type,(Integer) nbAlert);
 			}
 			
 			Configuration.connectionPool.closeConnection(connection);
@@ -67,7 +71,7 @@ public class ResidenceIndicators {
 	}
 	
 	private void retrieveAlerts() throws IOException{
-		Number nbAlertTot = 0;
+		nbAlertTot = 0;
 		Connection connection = Configuration.connectionPool.getConnection();
 		String requestSQL = "select count(*) from Alerts;";
 
@@ -75,13 +79,40 @@ public class ResidenceIndicators {
 			// We retrieve the alerts associated to the apartment
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery(requestSQL);
-			nbAlertTot = (Number)result;
+			nbAlertTot = result.getInt(1);
 			Configuration.connectionPool.closeConnection(connection);
 		}
 		catch(Exception e) {
 			Configuration.connectionPool.closeConnection(connection);
 			throw new IOException("An error occured while retrieving alert : " + e.getMessage());
 		}
+	}
+	
+	public ArrayList<Integer> computeRate() throws IOException{
+		tauxAlertByType = 0;
+		ArrayList<Integer> rateList = new ArrayList <Integer>();
+		for (String e : listOfAlerts.keySet()) {
+			tauxAlertByType	= (listOfAlerts.get(e)/nbAlertTot) * 100;
+			rateList.add(tauxAlertByType);
+		}
+		return rateList;
+	} 
+	
+	
+	public String alertByTypeTable() {
+		String str ="<h4>Alerts by type</h4>\n";
+		
+		if(listOfAlerts.isEmpty()) {
+			return "";
+		}else {
+			str+="<table class='distinguishedAlertTable'><tr><th>Alerts: </th>"+nbAlertTot+"</tr></table>\n";
+			str+="<table class='distinguishedAlertTable'><tr>\n";
+			str+="<th>Object Type</th><th>Number of Alerts</th><th>Message</th>\n";
+			str+="</tr>\n";
+			
+		}
+		return str;
+		
 	}
 
 }

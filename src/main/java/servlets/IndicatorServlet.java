@@ -11,10 +11,10 @@ package servlets;
 	import javax.servlet.http.HttpServletRequest;
 	import javax.servlet.http.HttpServletResponse;
 
-	import beans.Alert;
-	import beans.Employee;
-	import beans.Malfunction;
-	import business.EmployeesList;
+import beans.Alert;
+import beans.Employee;
+import beans.Malfunction;
+import business.EmployeesList;
 import business.map.ResidenceIndicators;
 import common.Configuration;
 
@@ -36,24 +36,25 @@ import common.Configuration;
 				response.sendRedirect("/tv/connect"); // The user must be an administrator identified
 				return;
 			}
-			Integer objectId;
 			ResidenceIndicators indicators;
 			try {
-				objectId = Integer.parseInt(request.getPathInfo().substring(1));
+				//objectId = Integer.parseInt(request.getPathInfo().substring(1));
+				indicators = new ResidenceIndicators();
 			} catch (Exception e) {
-				response.sendRedirect("/tv/map"); // Wrong id specified in the URI, we redirect to the map
+				response.sendRedirect("/tv/indicator"); // Wrong id specified in the URI, we redirect to the map
 				return;
 			}
 
-			request.setAttribute("object", apartmentInfo.getApartment().getName());
-			request.setAttribute("apartmentLevel", apartmentInfo.getApartment().getLevel());
-			request.setAttribute("apartmentId", apartmentId);
-			request.setAttribute("residentsInfo", apartmentInfo.getResidentsInfo());
-			request.setAttribute("activeAlerts", apartmentInfo.getActiveAlerts());
-			request.setAttribute("objects", apartmentInfo.getRelatedObjects());
-			request.setAttribute("oldAlerts", apartmentInfo.getOldAlerts());
+			request.setAttribute("alertByType", indicators.alertByTypeTable());
+			System.out.println("hello");
+//			request.setAttribute("apartmentLevel", apartmentInfo.getApartment().getLevel());
+//			request.setAttribute("apartmentId", apartmentId);
+//			request.setAttribute("residentsInfo", apartmentInfo.getResidentsInfo());
+//			request.setAttribute("activeAlerts", apartmentInfo.getActiveAlerts());
+//			request.setAttribute("objects", apartmentInfo.getRelatedObjects());
+//			request.setAttribute("oldAlerts", apartmentInfo.getOldAlerts());
 
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/apartment.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/indicator.jsp");
 			view.forward(request, response);
 		}
 

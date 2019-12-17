@@ -13,6 +13,7 @@ import beans.Malfunction;
 import beans.Resident;
 import common.Configuration;
 
+
 public class ApartmentInfos {
 
 	private Apartment apartment;
@@ -152,7 +153,7 @@ public class ApartmentInfos {
 			return "";
 
 		String tableAlerts = "<h4>Active alerts</h4>\n";
-
+ 
 		if(!listCurrentAlerts.isEmpty()) {
 			tableAlerts+="<table class='distinguishedAlertTable'><tr><th>Alerts</th></tr></table>\n";
 			tableAlerts+="<table class='distinguishedAlertTable'><tr>\n";

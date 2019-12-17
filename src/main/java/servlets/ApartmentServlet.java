@@ -43,7 +43,7 @@ public class ApartmentServlet extends HttpServlet {
 		} catch (Exception e) {
 			response.sendRedirect("/tv/map"); // Wrong id specified in the URI, we redirect to the map
 			return;
-		}
+		} 
 
 		request.setAttribute("apartmentName", apartmentInfo.getApartment().getName());
 		request.setAttribute("apartmentLevel", apartmentInfo.getApartment().getLevel());
