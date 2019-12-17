@@ -224,7 +224,7 @@ CREATE TABLE HistoricalMedicalData(
 	     MedicalData       float,
          Id_Object int not null,
 	  ,CONSTRAINT ID_HistoricaleMedicalData_PK PRIMARY KEY (ID_HistoricalMedicalData),
-       CONSTRAINT Data_Object_FK FOREIGN KEY (ID_Object ) Objects(ID_Object))ENGINE=InnoDB;
+       CONSTRAINT Data_Object_FK FOREIGN KEY (ID_Object ) REFERENCES Objects(ID_Object))ENGINE=InnoDB;
 );
 
 
