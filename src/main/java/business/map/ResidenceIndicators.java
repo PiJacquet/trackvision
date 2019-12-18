@@ -16,18 +16,19 @@ import beans.Resident;
 import common.Configuration;
 
 public class ResidenceIndicators {
-	
+
 	private ConnectedObject object;
-//	public int nbPannes;
-//	public int tauxPannes;
+	//	public int nbPannes;
+	//	public int tauxPannes;
 	private Map<String,Integer> listOfAlerts;
 	private ArrayList<ConnectedObject> listObjects;
 	private int nbAlertTot;
 	private int tauxAlertByType;
-	
+
 	public ResidenceIndicators() throws IOException {
 		Connection connection = Configuration.connectionPool.getConnection();
 		String requestSQL = "SELECT * FROM Objects";
+		listObjects = new ArrayList<ConnectedObject>();
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery(requestSQL);
@@ -40,11 +41,12 @@ public class ResidenceIndicators {
 			Configuration.connectionPool.closeConnection(connection);
 			throw new IOException("An error occured while getting the Object list : " + e.getMessage());
 		}
-//		retrieveResidentsList();
-//		retrieveObjectsList();
-//		retrieveAlerts();
-//		retrieveMalfunctions();
+		//		retrieveResidentsList();
+		//		retrieveObjectsList();
+		//		retrieveAlerts();
+		//		retrieveMalfunctions();
 	}
+	
 	private void retrieveAlertsByType() throws IOException{
 		listOfAlerts = new HashMap<String,Integer>();
 		int nbAlert = 0;
@@ -61,7 +63,7 @@ public class ResidenceIndicators {
 				type = result.getString(1);
 				listOfAlerts.put(type,(Integer) nbAlert);
 			}
-			
+
 			Configuration.connectionPool.closeConnection(connection);
 		}
 		catch(Exception e) {
@@ -69,7 +71,7 @@ public class ResidenceIndicators {
 			throw new IOException("An error occured while retrieving alert by type of objects : " + e.getMessage());
 		}
 	}
-	
+
 	private void retrieveAlerts() throws IOException{
 		nbAlertTot = 0;
 		Connection connection = Configuration.connectionPool.getConnection();
@@ -87,7 +89,7 @@ public class ResidenceIndicators {
 			throw new IOException("An error occured while retrieving alert : " + e.getMessage());
 		}
 	}
-	
+
 	public ArrayList<Integer> computeRate() throws IOException{
 		tauxAlertByType = 0;
 		ArrayList<Integer> rateList = new ArrayList <Integer>();
@@ -97,11 +99,11 @@ public class ResidenceIndicators {
 		}
 		return rateList;
 	} 
-	
-	
+
+
 	public String alertByTypeTable() {
 		String str ="<h4>Alerts by type</h4>\n";
-		
+
 		if(listOfAlerts.isEmpty()) {
 			return "";
 		}else {
@@ -109,10 +111,10 @@ public class ResidenceIndicators {
 			str+="<table class='distinguishedAlertTable'><tr>\n";
 			str+="<th>Object Type</th><th>Number of Alerts</th><th>Message</th>\n";
 			str+="</tr>\n";
-			
+
 		}
 		return str;
-		
+
 	}
 
 }

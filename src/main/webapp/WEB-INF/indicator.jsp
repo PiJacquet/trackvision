@@ -18,9 +18,10 @@
 	<div w3-include-html="/tv/common/${menu}.html"></div>
 
 	<a href="/tv/indicator" class="button-refresh">Refresh</a>
-
+	
+	${optionalMessage}
+	
 	<h3>Residence Indicators</h3>
-
 
 	<div class="Alerting">
 		${alertByType}
