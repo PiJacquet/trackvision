@@ -115,7 +115,7 @@ public class ResidenceIndicators {
 
 		str+="<table class='distinguishedAlertTable'><tr><th>Alerts: "+displaAlerts()+"</th></tr></table>\n";
 		str+="<table class='distinguishedAlertTable'><tr>\n";
-		str+="<td>Object Type</td><td>Number of Alerts</td><td>Taux d'alertes</td>\n";
+		str+="<td>Object Type</td><td>Number of Alerts</td><td>Alert rate</td>\n";
 		str+="</tr>\n";
 		
 		
