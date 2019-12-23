@@ -39,7 +39,7 @@ public class Map {
 		}
 		catch(Exception e) {
 			Configuration.connectionPool.closeConnection(connection);
-			throw new IOException("An error occured while constructing the map : " + e.getMessage());
+			throw new IOException("An error occured while constructing the map : " + e.getMessage()); 
 		}
 	}
 

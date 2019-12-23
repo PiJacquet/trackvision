@@ -33,7 +33,7 @@ public class IndicatorServlet extends HttpServlet{
 			return;
 		}
 
-		ResidenceIndicators indicators = null;
+		ResidenceIndicators indicators;
 		try {
 			
 			indicators = new ResidenceIndicators();

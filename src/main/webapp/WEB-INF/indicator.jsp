@@ -27,7 +27,7 @@
 		${alertByType}
 	</div>
 
-	<div w3-include-html="/tv/common/footer.html"></div>
+	<!-- <div w3-include-html="/tv/common/footer.html"></div> -->
 
 	<script>
 		includeHTML();

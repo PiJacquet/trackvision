@@ -28,7 +28,7 @@ public class Malfunction {
 	}
 	
 	public Malfunction(int id) {
-		this.id=id;
+		this.id=id; 
 	}
 
 	public boolean isActive() {

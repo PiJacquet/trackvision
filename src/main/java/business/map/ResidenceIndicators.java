@@ -9,10 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import beans.Alert;
-import beans.Apartment;
+
 import beans.ConnectedObject;
-import beans.Resident;
 import common.Configuration;
 
 public class ResidenceIndicators {
@@ -22,7 +20,6 @@ public class ResidenceIndicators {
 	//	public int tauxPannes;
 	private Map<String,Integer> listOfAlerts;
 	private ArrayList<ConnectedObject> listObjects;
-	private int nbAlertTot;
 	private int tauxAlertByType;
 
 	public ResidenceIndicators() throws IOException {
@@ -41,6 +38,7 @@ public class ResidenceIndicators {
 			Configuration.connectionPool.closeConnection(connection);
 			throw new IOException("An error occured while getting the Object list : " + e.getMessage());
 		}
+		retrieveAlertsByType();
 		//		retrieveResidentsList();
 		//		retrieveObjectsList();
 		//		retrieveAlerts();
@@ -59,10 +57,10 @@ public class ResidenceIndicators {
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery(requestSQL);
 			while(result.next()) {
-				nbAlert = result.getInt(2);
 				type = result.getString(1);
-				listOfAlerts.put(type,(Integer) nbAlert);
-			}
+				nbAlert = result.getInt(2);
+				listOfAlerts.put(type, nbAlert);
+			}  
 
 			Configuration.connectionPool.closeConnection(connection);
 		}
@@ -70,49 +68,74 @@ public class ResidenceIndicators {
 			Configuration.connectionPool.closeConnection(connection);
 			throw new IOException("An error occured while retrieving alert by type of objects : " + e.getMessage());
 		}
+		 
 	}
 
-	private void retrieveAlerts() throws IOException{
-		nbAlertTot = 0;
+	private int  retrieveAlerts() throws IOException{ 
+		int nbAlertTot = 0;
 		Connection connection = Configuration.connectionPool.getConnection();
-		String requestSQL = "select count(*) from Alerts;";
-
-		try {
+		String requestSQL = "select count(*) from Alerts"; 
+		try { 
 			// We retrieve the alerts associated to the apartment
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery(requestSQL);
-			nbAlertTot = result.getInt(1);
+			result.next();
+			nbAlertTot = result.getInt(1); 
 			Configuration.connectionPool.closeConnection(connection);
 		}
 		catch(Exception e) {
 			Configuration.connectionPool.closeConnection(connection);
 			throw new IOException("An error occured while retrieving alert : " + e.getMessage());
 		}
+		return nbAlertTot; 
 	}
 
-	public ArrayList<Integer> computeRate() throws IOException{
-		tauxAlertByType = 0;
-		ArrayList<Integer> rateList = new ArrayList <Integer>();
-		for (String e : listOfAlerts.keySet()) {
-			tauxAlertByType	= (listOfAlerts.get(e)/nbAlertTot) * 100;
-			rateList.add(tauxAlertByType);
-		}
-		return rateList;
+//	public ArrayList<Integer> computeRate() throws IOException{
+//		ArrayList<Integer> rateList = new ArrayList <Integer>();
+//		for (String e : listOfAlerts.keySet()) {
+//			tauxAlertByType	= ((listOfAlerts.get(e))*100/retrieveAlerts());
+//			rateList.add(tauxAlertByType);
+//		}
+//		return rateList;
+//	} 
+	
+	public String displaAlerts() throws IOException{
+		String alerts = " ";
+		alerts += retrieveAlerts()+" alertes";
+		return alerts;
 	} 
 
 
-	public String alertByTypeTable() {
+	public String alertByTypeTable() throws IOException{
 		String str ="<h4>Alerts by type</h4>\n";
 
 		if(listOfAlerts.isEmpty()) {
-			return "";
-		}else {
-			str+="<table class='distinguishedAlertTable'><tr><th>Alerts: </th>"+nbAlertTot+"</tr></table>\n";
-			str+="<table class='distinguishedAlertTable'><tr>\n";
-			str+="<th>Object Type</th><th>Number of Alerts</th><th>Message</th>\n";
-			str+="</tr>\n";
-
+			return "<p>Votre liste est vide</p>";
 		}
+
+		str+="<table class='distinguishedAlertTable'><tr><th>Alerts: "+displaAlerts()+"</th></tr></table>\n";
+		str+="<table class='distinguishedAlertTable'><tr>\n";
+		str+="<td>Object Type</td><td>Number of Alerts</td><td>Taux d'alertes</td>\n";
+		str+="</tr>\n";
+		
+		
+		
+			for (String e : listOfAlerts.keySet()) {
+				str+="<tr>";
+				str+="<th>"+e+"</th>";
+				str+="<th>"+listOfAlerts.get(e)+"</th>";
+				str+="<th>"+((listOfAlerts.get(e))*100/retrieveAlerts()+"%")+"</th>";
+				
+				
+				}
+			
+			
+			
+				
+				
+				
+			
+			
 		return str;
 
 	}
