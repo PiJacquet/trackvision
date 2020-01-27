@@ -73,7 +73,7 @@ body {
 /* Style of the formular */
 
 input[type=text],input[type="password"], select, textarea {
-  width: 500%;
+  width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
