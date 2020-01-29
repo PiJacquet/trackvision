@@ -27,6 +27,11 @@
 	<div class="residence">
 		${map}
 	</div>
+	
+	<h4>Legend</h4>
+	<div class='legend'><div class='legend-dot noalert'></div> Everything is fine!</div>
+	<div class='legend'><div class='legend-dot malfunction'></div> At least one malfunction was detected in the apartment!</div>
+	<div class='legend'><div class='legend-dot alert'></div> At least one alert was detected! The number represent the amount of alerts and malfunctions</div>
 
 	<div w3-include-html="/tv/common/footer.html"></div>
 

@@ -32,7 +32,7 @@
 
 	${activeAlerts}
 	
-	<h4>List of related objects</h4>
+	<h2>List of related objects</h2>
 
 	${objects}
 	

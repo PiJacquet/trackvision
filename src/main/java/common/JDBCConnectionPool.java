@@ -12,7 +12,7 @@ public class JDBCConnectionPool {
 	public JDBCConnectionPool() {
 		try {
 		Class.forName("com.mysql.jdbc.Driver"); 
-		}catch(Exception e) {
+		}catch(ClassNotFoundException  e) {
 			System.out.println(e.getMessage());
 		}
 		listConnections = new ArrayList<Connection>();

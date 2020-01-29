@@ -151,7 +151,7 @@ public class ApartmentInfos {
 		if(listCurrentAlerts.isEmpty() && listCurrentMalfunction.isEmpty())
 			return "";
 
-		String tableAlerts = "<h4>Active alerts</h4>\n";
+		String tableAlerts = "<h2>Active alerts</h2>\n";
 
 		if(!listCurrentAlerts.isEmpty()) {
 			tableAlerts+="<table class='distinguishedAlertTable'><tr><th>Alerts</th></tr></table>\n";
@@ -166,8 +166,8 @@ public class ApartmentInfos {
 		}
 
 		if(!listCurrentMalfunction.isEmpty()) {
-			tableAlerts+="<table class='distinguishedAlertTable'><tr><th>Malfunctions</th></tr></table>\n";
-			tableAlerts+="<table class='distinguishedAlertTable'><tr>\n";
+			tableAlerts+="<table class='distinguishedMalfunctionTable'><tr><th>Malfunctions</th></tr></table>\n";
+			tableAlerts+="<table class='distinguishedMalfunctionTable'><tr>\n";
 			tableAlerts+="<th>Date</th><th>Message</th><th>Object</th><th>Disable</th>\n";
 			tableAlerts+="</tr>\n";
 			for(Malfunction malfunction : listCurrentMalfunction)
@@ -198,7 +198,7 @@ public class ApartmentInfos {
 		if(listOldAlerts.isEmpty() && listOldMalfunction.isEmpty())
 			return "";
 
-		String tableAlerts = "<h4>Old alerts</h4>\n";
+		String tableAlerts = "<h2>Old alerts</h2>\n";
 
 		if(!listOldAlerts.isEmpty()) {
 			tableAlerts+="<table class='distinguishedTable'><tr><th>Alerts</th></tr></table>\n";

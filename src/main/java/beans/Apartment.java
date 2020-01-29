@@ -30,7 +30,11 @@ public class Apartment {
 	}
 	
 	public Boolean isInAlert() {
-		return getTotalReports()>0;
+		return numberOfAlerts>0;
+	}
+	
+	public Boolean hasMalfunction() {
+		return numberOfMalfunctions>0;
 	}
 
 	public String getLink(Integer locatedApartId) {
@@ -39,6 +43,8 @@ public class Apartment {
 			classLocated = "blink"; // If this is the apart asked to be located, we add the blink css effect.
 		if(isInAlert())
 			return "<a class='apartment alert " + classLocated + "' href='map/" + id + "'>" + name + " (" + getTotalReports() + ")</a>\n";
+		else if(hasMalfunction())
+			return "<a class='apartment malfunction " + classLocated + "' href='map/" + id + "'>" + name + " (" + numberOfMalfunctions + ")</a>\n";
 		else
 			return "<a class='apartment noalert " + classLocated + "' href='map/" + id + "'>" + name + "</a>\n";
 	}
