@@ -16,7 +16,7 @@ public class EmployeesList {
 
 	public EmployeesList() throws IOException {
 		employees = new ArrayList<Employee>();
-		Connection connection = Configuration.connectionPool.getConnection();
+		Connection connection = Configuration.connectionPool.getConnection(); 
 		String requestSQL = "SELECT * FROM Employees";
 		try {
 			Statement statement = connection.createStatement();

@@ -77,6 +77,15 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>indicatorId</servlet-name>
+		<servlet-class>servlets.IndicatorServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>indicatorId</servlet-name>
+		<url-pattern>/indicator</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>apartmentId</servlet-name>
 		<servlet-class>servlets.ApartmentServlet</servlet-class>
 	</servlet>
@@ -84,6 +93,8 @@
 		<servlet-name>apartmentId</servlet-name>
 		<url-pattern>/map/*</url-pattern>
 	</servlet-mapping>
+	
+	
 
 	<servlet>
 		<servlet-name>configurationServletId</servlet-name>
