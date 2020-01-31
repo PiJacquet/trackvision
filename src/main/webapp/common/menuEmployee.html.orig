@@ -3,8 +3,12 @@
   <div id="myLinks">
     <a href="/tv/map">Map</a>
     <a href="/tv/listEmployees">List of Employees</a>
-    <a href="/tv/indicator">Residence Indicators</a>
+<<<<<<< HEAD
+    <a href="/tv/configuration">Configure a connected object</a>
     
+=======
+    <a href="/tv/indicator">Residence Indicators</a>
+>>>>>>> analyze_the_activity_of_the_residence
     <a href="/tv/disconnect">Disconnect</a>
   </div>
   <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">

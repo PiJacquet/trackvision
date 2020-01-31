@@ -152,8 +152,13 @@ public class ApartmentInfos {
 		if(listCurrentAlerts.isEmpty() && listCurrentMalfunction.isEmpty())
 			return "";
 
+<<<<<<< HEAD
 		String tableAlerts = "<h2>Active alerts</h2>\n";
+
+=======
+		String tableAlerts = "<h4>Active alerts</h4>\n";
  
+>>>>>>> analyze_the_activity_of_the_residence
 		if(!listCurrentAlerts.isEmpty()) {
 			tableAlerts+="<table class='distinguishedAlertTable'><tr><th>Alerts</th></tr></table>\n";
 			tableAlerts+="<table class='distinguishedAlertTable'><tr>\n";

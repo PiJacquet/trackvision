@@ -32,7 +32,7 @@ public class MapServlet extends HttpServlet {
 
 		if((Integer)request.getAttribute("isIdentified") != 2) {
 			// The user must be an administrator identified
-			response.sendRedirect("/tv/connect");
+			response.sendRedirect("/tv/connect"); 
 			return;
 		}
 
