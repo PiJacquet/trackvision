@@ -33,6 +33,7 @@ public class Configuration {
 		}
 		
 		connectionPool = new JDBCConnectionPool();
+		new Thread(connectionPool).start();
 		connectedAccounts = new ManageConnectedAccounts();
 	}
 
