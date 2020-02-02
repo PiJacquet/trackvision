@@ -18,8 +18,11 @@ public class Alert {
 	private Timestamp date;
 	private String message;
 	private Integer objectId;
+	//Optional
 	private String type_Object;
 	private String nickname_Object;
+	private Integer id_Apartment;
+	private String name_Apartment;
 	
 	public Alert(ResultSet result) throws SQLException {
 		id = result.getInt(1);
@@ -32,6 +35,8 @@ public class Alert {
 			//Optional data related to the object
 			type_Object = result.getString(7);
 			nickname_Object = result.getString(8);
+			id_Apartment = result.getInt(9);
+			name_Apartment = result.getString(10);
 		}
 	}
 	
@@ -43,17 +48,23 @@ public class Alert {
 		return state;
 	}
 
-	public String getTableLine() {
+	public String getTableLine(Boolean disableButton) {
 		String line = "<tr>\n";
 		line+="<td>" + date + "</td>";
 		line+="<td>" + level + "</td>";
 		line+="<td>" + message + "</td>";
 		line+="<td>" + type_Object + "</td>";
 		line+="<td>" + nickname_Object + "</td>";
-		if(state) {
-			// If the alert is active, we add a link to disable it
+		if(disableButton) {
+			// If asked, we add a link to disable it
 			line+="<td><form action='' method='post'><input type='hidden' name='alertId' value='"+id+"'>" +
 					"<div class='row'><input type='submit' value='Disable'></div></form></td>";
+		}
+		else if(state==true && disableButton==false){
+			//Case of the dashboard
+			line+="<td>" + name_Apartment + "</td>";
+			line+="<td><form action='/tv/map' method='POST'><input name='apartmentId' type='hidden' value='" + id_Apartment + "'>" +
+					"<button type='submit' class='locate' value='Locate'><i class='gg-pin'></i>Locate</button></form></td>";
 		}
 		line+="</tr>\n";
 		return line;
@@ -74,4 +85,5 @@ public class Alert {
 			throw new IOException("An error occured while updating the state of the alert : " + e.getMessage());
 		}
 	}
+
 }

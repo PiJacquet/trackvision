@@ -17,7 +17,7 @@
 	<div w3-include-html="/tv/common/${menu}.html"></div>
 
 	<div style="padding-left: 16px">
-		<br> ${optionalMessage}
+		<br> ${notifier}
 		<h3>Sign in!</h3>
 		<div class="container">
 			<form action="/tv/connect" method="post">

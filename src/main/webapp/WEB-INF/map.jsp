@@ -18,6 +18,7 @@
 	<div w3-include-html="/tv/common/${menu}.html"></div>
 
 	<a href="/tv/map" class="button-refresh"><i class="gg-sync"></i>Refresh</a>
+	${notifier}
 
 	<h3>Residence Map</h3>
 

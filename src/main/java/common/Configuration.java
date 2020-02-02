@@ -7,9 +7,10 @@ import business.ManageConnectedAccounts;
 
 public class Configuration {
 	
-	public static Boolean startup = true;
+	public static Boolean startup = false;
 	
 	public static JDBCConnectionPool connectionPool;
+	public static Thread connectionPoolThread;
 	
 	public static String db_url;
 	public static String db_name;
@@ -33,7 +34,8 @@ public class Configuration {
 		}
 		
 		connectionPool = new JDBCConnectionPool();
-		new Thread(connectionPool).start();
+		connectionPoolThread = new Thread(connectionPool);
+		connectionPoolThread.start();
 		connectedAccounts = new ManageConnectedAccounts();
 	}
 

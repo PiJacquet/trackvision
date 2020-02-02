@@ -39,10 +39,12 @@ public class MenuFilter implements Filter {
 						tokenFound = true;
 						if(Configuration.connectedAccounts.getAccount(cookie.getValue()).getAccount()==AccountType.Resident) {
 							req.setAttribute("isIdentified", 1);
+							req.setAttribute("hash", cookie.getValue());
 							req.setAttribute("menu", "menuResident");
 						}
 						else {
 							req.setAttribute("isIdentified", 2);
+							req.setAttribute("hash", cookie.getValue());
 							req.setAttribute("menu", "menuEmployee");
 						}
 						req.setAttribute("TokenTV", cookie.getValue());

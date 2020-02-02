@@ -8,14 +8,14 @@ import common.JDBCConnectionPool;
 public class InitializationServlet implements javax.servlet.ServletContextListener{
 
 	public void contextInitialized(ServletContextEvent sce) {
-		if(Configuration.startup==true) {
+		if(Configuration.startup==false) {
 			Configuration configuration = new Configuration();
-			Configuration.startup=false;
+			Configuration.startup=true;
 		}
 	}
 
 	public void contextDestroyed(ServletContextEvent sce) {
-		
+		Configuration.connectionPoolThread.interrupt();
 	}
 
 }

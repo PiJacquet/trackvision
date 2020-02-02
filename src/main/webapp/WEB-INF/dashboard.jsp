@@ -16,27 +16,15 @@
 <body>
 
 	<div w3-include-html="/tv/common/${menu}.html"></div>
-
-	<a href="/tv/map" class="button-refresh">Return to the map</a>
-	<form action="/tv/map" method="POST">
-		<input name="apartmentId" type="hidden" value="${apartmentId}">
-		<input type="submit" class="button-refresh" value="See on the map"></input>
-	</form>
-
+	
+	<a href="/tv/dashboard" class="button-refresh"><i class="gg-sync"></i>Refresh</a>
 	${notifier}
-
-	<h3>Information about the Apartment '${apartmentName}' (level ${apartmentLevel})</h3>
-
-	<h4>Who lives here?</h4>
-	${residentsInfo}
-
-	${activeAlerts}
 	
-	<h2>List of related objects</h2>
-
-	${objects}
+	<h2>Dashboard</h2>
 	
-	${oldAlerts}
+	<h4>Welcome ${name}! </h4>
+	
+	${alerts}
 
 	<div w3-include-html="/tv/common/footer.html"></div>
 

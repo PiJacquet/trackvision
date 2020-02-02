@@ -19,6 +19,13 @@ public class IndexServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if((Integer)request.getAttribute("isIdentified") == 2) {
+			// If The user is an administrator identified, we redirect him
+			response.sendRedirect("/tv/dashboard"); 
+			return;
+		}
+		
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/index.jsp");
 		view.forward(request, response);
 	}

@@ -133,5 +133,14 @@
 		<servlet-name>choiceId</servlet-name>
 		<url-pattern>/packageChoice</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>dashboardId</servlet-name>
+		<servlet-class>servlets.DashboardServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dashboardId</servlet-name>
+		<url-pattern>/dashboard</url-pattern>
+	</servlet-mapping>
 
 </web-app>
