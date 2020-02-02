@@ -18,6 +18,8 @@ public class Alert {
 	private Timestamp date;
 	private String message;
 	private Integer objectId;
+	private String type_Object;
+	private String nickname_Object;
 	
 	public Alert(ResultSet result) throws SQLException {
 		id = result.getInt(1);
@@ -26,6 +28,11 @@ public class Alert {
 		date = result.getTimestamp(4);
 		message = result.getString(5);
 		objectId = result.getInt(6);
+		if(result.getMetaData().getColumnCount()>6) {
+			//Optional data related to the object
+			type_Object = result.getString(7);
+			nickname_Object = result.getString(8);
+		}
 	}
 	
 	public Alert(int id) {
@@ -41,7 +48,8 @@ public class Alert {
 		line+="<td>" + date + "</td>";
 		line+="<td>" + level + "</td>";
 		line+="<td>" + message + "</td>";
-		line+="<td>" + objectId + "</td>";
+		line+="<td>" + type_Object + "</td>";
+		line+="<td>" + nickname_Object + "</td>";
 		if(state) {
 			// If the alert is active, we add a link to disable it
 			line+="<td><form action='' method='post'><input type='hidden' name='alertId' value='"+id+"'>" +

@@ -20,7 +20,7 @@
 	<a href="/tv/map" class="button-refresh">Return to the map</a>
 	<form action="/tv/map" method="POST">
 		<input name="apartmentId" type="hidden" value="${apartmentId}">
-		<input type="submit" class="button-refresh" value="See on the map">
+		<input type="submit" class="button-refresh" value="See on the map"></input>
 	</form>
 
 	${message}

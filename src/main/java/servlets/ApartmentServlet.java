@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Alert;
+import beans.ConnectedObject;
 import beans.Employee;
 import beans.Malfunction;
 import business.EmployeesList;
@@ -63,18 +64,42 @@ public class ApartmentServlet extends HttpServlet {
 				Integer id = Integer.parseInt(request.getParameter("alertId"));
 				Alert alert = new Alert(id);
 				alert.disableOnDB();
-				request.setAttribute("message", "The alert n°" + id + " was disabled");
+				setNotifierMessage(request, "The alert n°" + id + " was disabled");
 			}
 			else if(request.getParameter("malfunctionId") != null) {
 				Integer id = Integer.parseInt(request.getParameter("malfunctionId"));
 				Malfunction malfunction = new Malfunction(id);
 				malfunction.disableOnDB();
-				request.setAttribute("message", "The malfunction n°" + id + " was disabled");
+				setNotifierMessage(request, "The malfunction n°" + id + " was disabled");
+			}
+			else if(request.getParameter("objectId") != null) {
+				Integer id = Integer.parseInt(request.getParameter("objectId"));
+				ConnectedObject object = new ConnectedObject(id);
+				object.updateNickNameDB(request.getParameter("nickname"));
+				setNotifierMessage(request, "The object n°" + id + " was renamed to '" + request.getParameter("nickname") + "'");
 			}
 		}catch(Exception e) {
-			request.setAttribute("message", "An error occured during the process");
+			setNotifierMessage(request, "An error occured during the process");
 		}
 		doGet(request,response);
+	}
+	
+	private void setNotifierMessage(HttpServletRequest request, String message) {
+		if(request.getAttribute("message")==null) {
+			String notifier = "<div class='notifier'><i class='gg-danger'></i>" + message + "</div>";
+			request.setAttribute("message", notifier);
+		}
+		else {
+			String notifier = (String)request.getAttribute("message");
+			if(notifier.indexOf("</a></div>")!=-1) {
+				notifier = notifier.substring(0, notifier.indexOf("</div>")-1) + message + "</div>";
+				request.setAttribute("message", notifier);
+			}
+			else {
+				request.setAttribute("message", null);
+				setNotifierMessage(request, notifier + " | " + message );
+			}
+		}
 	}
 
 }

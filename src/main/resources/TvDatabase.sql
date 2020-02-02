@@ -2,8 +2,6 @@ drop database trackdevdb;
 create database trackdevdb;
 use trackdevdb;
 
-
-
 #------------------------------------------------------------
 #        Script MySQL.
 #------------------------------------------------------------
@@ -48,7 +46,7 @@ CREATE TABLE Package(
         description Varchar (50) NOT NULL ,
         connected_object Int NOT NULL ,
         meal Int NOT NULL ,
-        total_price
+        total_price INT NOT NULL
         ,CONSTRAINT Package_PK PRIMARY KEY (ID_PACKAGE)
 )ENGINE=InnoDB;
 
@@ -135,7 +133,10 @@ CREATE TABLE Objects(
         Type_Object   Varchar(30) NOT NULL,
 	    State_Object  Bool NOT NULL ,
         ID_Apartment Int NOT NULL ,
-        Mac_Object VarChar(17) 
+        Mac_Object VarChar(17),
+		Nickname_Object VarChar(30) NOT NULL,
+		WatchMinutesOn Int NOT NULL,
+		WatchMinutesOff Int NOT NULL
 	,CONSTRAINT Objects_PK PRIMARY KEY (ID_Object)
 	,CONSTRAINT Objects_Type_FK FOREIGN KEY (Type_Object) REFERENCES Referentiel_Objects(Type_Object) 
 	,CONSTRAINT Objects_Apartment_FK FOREIGN KEY (ID_Apartment) REFERENCES Apartments(ID_Apartment)
@@ -219,13 +220,13 @@ CREATE TABLE ObjectsFurnace(
 # Table: HistoricalMedicalData
 #------------------------------------------------------------
 CREATE TABLE HistoricalMedicalData(
-	     Id_hHistoriqueMedicalData  Int  Auto_increment  NOT NULL ,
+	     Id_HistoricalMedicalData  Int  Auto_increment  NOT NULL ,
          Date Varchar (20) NOT NULL ,
 	     MedicalData       float,
-         Id_Object int not null,
+         Id_Object int not null
 	  ,CONSTRAINT ID_HistoricaleMedicalData_PK PRIMARY KEY (ID_HistoricalMedicalData),
-       CONSTRAINT Data_Object_FK FOREIGN KEY (ID_Object ) REFERENCES Objects(ID_Object))ENGINE=InnoDB;
-);
+       CONSTRAINT Data_Object_FK FOREIGN KEY (ID_Object ) REFERENCES Objects(ID_Object)
+)ENGINE=InnoDB;
 
 
 insert into Referentiel_Objects(Type_Object) values('Smoke Sensor');
@@ -259,35 +260,35 @@ insert into Residents(Login_Resident, Password_Resident, Lastname_Resident, Firs
 insert into Residents(Login_Resident, Password_Resident, Lastname_Resident, Firstname_Resident, Age_Resident, Information_Resident, ID_Apartment) values ('ismail_res','tv','Zaaouar','Ismail',87,'RAS',2);
 
 
-insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Smoke sensor', 1, 1, 'c0:b0:0c:07:ac:11');
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object, Nickname_Object, WatchMinutesOn, WatchMinutesOff) values ('Smoke sensor', 1, 1, 'c0:b0:0c:07:ac:11','',60,420);
 insert into ObjectsSmoke (ID_ObjectSmoke, Sensibility_ObjectSmoke) values (LAST_INSERT_ID(),20);
 
-insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Temperature Sensor', 1, 1, '4e:c1:45:47:ab:32');
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object, Nickname_Object, WatchMinutesOn, WatchMinutesOff) values ('Temperature Sensor', 1, 1, '4e:c1:45:47:ab:32','', 60,420);
 insert into ObjectsTemperature (ID_ObjectTemperature, Reference_ObjectTemperature, ToleranceMin_ObjectTemperature, ToleranceMax_ObjectTemperature, currentTemp_ObjectTemperature) values (LAST_INSERT_ID(),20.0,16.0,24.0,15.0); 
 
-insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Furnace', 1, 1, '8f:c9:ed:07:ca:24');
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object, Nickname_Object, WatchMinutesOn, WatchMinutesOff) values ('Furnace', 1, 1, '8f:c9:ed:07:ca:24','',60,420);
 insert into ObjectsFurnace (ID_ObjectFurnace, Reference_ObjectTemperature,currentTemp_ObjetTemperature) values (LAST_INSERT_ID(),200.0,150.0);
 
-insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Smoke sensor', 1, 2, 'a8:87:dd:b9:ca:19');
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object, Nickname_Object, WatchMinutesOn, WatchMinutesOff) values ('Smoke sensor', 1, 2, 'a8:87:dd:b9:ca:19','',60,420);
 insert into ObjectsSmoke (ID_ObjectSmoke, Sensibility_ObjectSmoke) values (LAST_INSERT_ID(),20);
 
-insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Temperature Sensor', 1, 2, '36:3d:e7:9a:f5:15');
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object, Nickname_Object, WatchMinutesOn, WatchMinutesOff) values ('Temperature Sensor', 1, 2, '36:3d:e7:9a:f5:15','',60,420);
 insert into ObjectsTemperature (ID_ObjectTemperature, Reference_ObjectTemperature, ToleranceMin_ObjectTemperature, ToleranceMax_ObjectTemperature, currentTemp_ObjectTemperature) values (LAST_INSERT_ID(),20.0,16.0,24.0,15.0); 
 
-insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Furnace', 1, 2, 'd8:b2:7a:11:21:1a');
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object, Nickname_Object, WatchMinutesOn, WatchMinutesOff) values ('Furnace', 1, 2, 'd8:b2:7a:11:21:1a','', 60,420);
 insert into ObjectsFurnace (ID_ObjectFurnace, Reference_ObjectTemperature,currentTemp_ObjetTemperature) values (LAST_INSERT_ID(),200.0,150.0);
 
-insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Smoke sensor', 1, 7, 'dc:6b:f1:e8:a2:06');
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object, Nickname_Object, WatchMinutesOn, WatchMinutesOff) values ('Smoke sensor', 1, 7, 'dc:6b:f1:e8:a2:06','', 60,420);
 insert into ObjectsSmoke (ID_ObjectSmoke, Sensibility_ObjectSmoke) values (LAST_INSERT_ID(),20);
 
-insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Temperature Sensor', 1, 7, 'b7:47:79:6d:3c:78');
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object, Nickname_Object, WatchMinutesOn, WatchMinutesOff) values ('Temperature Sensor', 1, 7, 'b7:47:79:6d:3c:78','', 60,420);
 insert into ObjectsTemperature (ID_ObjectTemperature, Reference_ObjectTemperature, ToleranceMin_ObjectTemperature, ToleranceMax_ObjectTemperature, currentTemp_ObjectTemperature) values (LAST_INSERT_ID(),20.0,16.0,24.0,15.0); 
 
-insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Furnace', 1, 7, 'f6:a2:be:ea:66:95');
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object, Nickname_Object, WatchMinutesOn, WatchMinutesOff) values ('Furnace', 1, 7, 'f6:a2:be:ea:66:95','', 60,420);
 insert into ObjectsFurnace (ID_ObjectFurnace, Reference_ObjectTemperature,currentTemp_ObjetTemperature) values (LAST_INSERT_ID(),200.0,150.0);
 
-insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Connected Bracelet', 1, 1, '34:f5:ee:a4:87:23');
-insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object) values ('Connected Bracelet', 1, 2, 'e9:67:8a:98:6d:56');
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object, Nickname_Object, WatchMinutesOn, WatchMinutesOff) values ('Connected Bracelet', 1, 1, '34:f5:ee:a4:87:23','', 60,420);
+insert into Objects (Type_Object, State_Object, ID_Apartment, Mac_Object, Nickname_Object, WatchMinutesOn, WatchMinutesOff) values ('Connected Bracelet', 1, 2, 'e9:67:8a:98:6d:56','', 60,420);
 
 insert into Alerts (State_Alert, Level_Alert, Date_Alert, Message_Alert, ID_Object) values(0, 3, NOW(), 'Smoke detected', 1);
 insert into Alerts (State_Alert, Level_Alert, Date_Alert, Message_Alert, ID_Object) values(1, 3, NOW(), 'Smoke detected', 1);

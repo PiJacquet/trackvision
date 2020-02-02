@@ -13,7 +13,6 @@ import beans.Malfunction;
 import beans.Resident;
 import common.Configuration;
 
-
 public class ApartmentInfos {
 
 	private Apartment apartment;
@@ -90,7 +89,7 @@ public class ApartmentInfos {
 		Connection connection = Configuration.connectionPool.getConnection();
 		try {
 			// We retrieve the alerts associated to the apartment
-			PreparedStatement stmt = connection.prepareStatement("SELECT ID_Alert,State_Alert,Level_Alert,Date_Alert,Message_Alert,Alerts.ID_Object FROM Alerts INNER JOIN Objects ON Alerts.ID_Object=Objects.ID_Object WHERE Objects.ID_Apartment=? ORDER BY Date_Alert DESC;");
+			PreparedStatement stmt = connection.prepareStatement("SELECT ID_Alert,State_Alert,Level_Alert,Date_Alert,Message_Alert,Alerts.ID_Object,Objects.Type_Object,Objects.Nickname_Object FROM Alerts INNER JOIN Objects ON Alerts.ID_Object=Objects.ID_Object WHERE Objects.ID_Apartment=? ORDER BY Date_Alert DESC;");
 			stmt.setInt(1, apartment.getId());
 			ResultSet result = stmt.executeQuery();
 			while(result.next()) {
@@ -114,7 +113,7 @@ public class ApartmentInfos {
 		Connection connection = Configuration.connectionPool.getConnection();
 		try {
 			// We retrieve the alerts associated to the apartment
-			PreparedStatement stmt = connection.prepareStatement("SELECT ID_Malfunction,State_Malfunction,Date_Malfunction,Message_Malfunction,Malfunctions.ID_Object FROM Malfunctions INNER JOIN Objects ON Malfunctions.ID_Object=Objects.ID_Object WHERE Objects.ID_Apartment=? ORDER BY Date_Malfunction DESC;");
+			PreparedStatement stmt = connection.prepareStatement("SELECT ID_Malfunction,State_Malfunction,Date_Malfunction,Message_Malfunction,Malfunctions.ID_Object,Objects.Type_Object,Objects.Nickname_Object FROM Malfunctions INNER JOIN Objects ON Malfunctions.ID_Object=Objects.ID_Object WHERE Objects.ID_Apartment=? ORDER BY Date_Malfunction DESC;");
 			stmt.setInt(1, apartment.getId());
 			ResultSet result = stmt.executeQuery();
 			while(result.next()) {
@@ -157,7 +156,7 @@ public class ApartmentInfos {
 		if(!listCurrentAlerts.isEmpty()) {
 			tableAlerts+="<table class='distinguishedAlertTable'><tr><th>Alerts</th></tr></table>\n";
 			tableAlerts+="<table class='distinguishedAlertTable'><tr>\n";
-			tableAlerts+="<th>Date</th><th>Level</th><th>Message</th><th>Object</th><th>Disable</th>\n";
+			tableAlerts+="<th>Date</th><th>Level</th><th>Message</th><th>Object Type</th><th>Object Nickname</th><th>Disable</th>\n";
 			tableAlerts+="</tr>\n";
 			for(Alert alert : listCurrentAlerts)
 				tableAlerts+=alert.getTableLine();
@@ -169,7 +168,7 @@ public class ApartmentInfos {
 		if(!listCurrentMalfunction.isEmpty()) {
 			tableAlerts+="<table class='distinguishedMalfunctionTable'><tr><th>Malfunctions</th></tr></table>\n";
 			tableAlerts+="<table class='distinguishedMalfunctionTable'><tr>\n";
-			tableAlerts+="<th>Date</th><th>Message</th><th>Object</th><th>Disable</th>\n";
+			tableAlerts+="<th>Date</th><th>Message</th><th>Object Type</th><th>Object Nickname</th><th>Disable</th>\n";
 			tableAlerts+="</tr>\n";
 			for(Malfunction malfunction : listCurrentMalfunction)
 				tableAlerts+=malfunction.getTableLine();
@@ -186,7 +185,7 @@ public class ApartmentInfos {
 			return "<p>No objects are currently related to this apartment </p>";
 		
 		String tableObject ="<table class='distinguishedTable'>\n";
-		tableObject+="<tr><th>ID</th><th>Type</th><th>State</th><th>Mac address</th></tr>\n";
+		tableObject+="<tr><th>ID</th><th>Type</th><th>State</th><th>Nickname</th><th>Mac address</th></tr>\n";
 		for(ConnectedObject object : listObjects)
 			tableObject+=object.getTableLine();
 		tableObject+="</table>\n";
@@ -204,7 +203,7 @@ public class ApartmentInfos {
 		if(!listOldAlerts.isEmpty()) {
 			tableAlerts+="<table class='distinguishedTable'><tr><th>Alerts</th></tr></table>\n";
 			tableAlerts+="<table class='distinguishedTable'><tr>\n";
-			tableAlerts+="<th>Date</th><th>Level</th><th>Message</th><th>Object</th>\n";
+			tableAlerts+="<th>Date</th><th>Level</th><th>Message</th><th>Object Type</th><th>Object Nickname</th>\n";
 			tableAlerts+="</tr>\n";
 			for(Alert alert : listOldAlerts)
 				tableAlerts+=alert.getTableLine();
@@ -216,7 +215,7 @@ public class ApartmentInfos {
 		if(!listOldMalfunction.isEmpty()) {
 			tableAlerts+="<table class='distinguishedTable'><tr><th>Malfunctions</th></tr></table>\n";
 			tableAlerts+="<table class='distinguishedTable'><tr>\n";
-			tableAlerts+="<th>Date</th><th>Message</th><th>Object</th>\n";
+			tableAlerts+="<th>Date</th><th>Message</th><th>Object Type</th><th>Object Nickname</th>\n";
 			tableAlerts+="</tr>\n";
 			for(Malfunction malfunction : listOldMalfunction)
 				tableAlerts+=malfunction.getTableLine();
