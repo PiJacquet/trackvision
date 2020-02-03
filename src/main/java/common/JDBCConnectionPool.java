@@ -78,7 +78,7 @@ public class JDBCConnectionPool implements Runnable{
 		Integer numberOfMissingConnection;
 		try {
 			while(true) {
-				Thread.sleep(4*60*60*1000);
+				Thread.sleep(62*60*1000);
 				numberOfMissingConnection=0;
 				for(Connection co : listConnections) {
 					try {
